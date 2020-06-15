@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validate options should throw an error on the "format" option with true value 1`] = `
+"Invalid options object. Image Placeholder Loader has been initialized using an options object that does not match the API schema.
+ - options.format should be one of these:
+   \\"jpeg\\" | \\"png\\" | \\"webp\\" | \\"tiff\\"
+   -> Format of the output image. Default to the same as the import image."
+`;
+
+exports[`validate options should throw an error on the "quality" option with 0 value 1`] = `
+"Invalid options object. Image Placeholder Loader has been initialized using an options object that does not match the API schema.
+ - options.quality should be >= 1.
+   -> Quality of the output image. Only applies when the output format is JPEG or WebP. Default to 80"
+`;
+
+exports[`validate options should throw an error on the "scaleUp" option with 0 value 1`] = `
+"Invalid options object. Image Placeholder Loader has been initialized using an options object that does not match the API schema.
+ - options.scaleUp should be a boolean.
+   -> When the image size is smaller than the desired image size, should the loader scale up the image? When false, output the original image. Default to false."
+`;
+
+exports[`validate options should throw an error on the "sharpOptions" option with 0 value 1`] = `
+"Invalid options object. Image Placeholder Loader has been initialized using an options object that does not match the API schema.
+ - options.sharpOptions should be an object:
+   object { resize?, png?, jpeg?, webp?, tiff?, … }"
+`;
+
+exports[`validate options should throw an error on the "size" option with true value 1`] = `
+"Invalid options object. Image Placeholder Loader has been initialized using an options object that does not match the API schema.
+ - options.size should be an object:
+   object { width?, height?, fit?, position?, background?, … }
+   -> Size of output image."
+`;
+
+exports[`validate options should throw an error on the "size" option with undefined value 1`] = `
+"Invalid options object. Image Placeholder Loader has been initialized using an options object that does not match the API schema.
+ - options misses the property 'size'. Should be:
+   object { width?, height?, fit?, position?, background?, … }
+   -> Size of output image."
+`;
