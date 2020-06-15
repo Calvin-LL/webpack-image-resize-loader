@@ -57,6 +57,10 @@
         "webp": { "type": "object", "additionalProperties": true },
         "tiff": { "type": "object", "additionalProperties": true }
       }
+    },
+    "fileLoaderOptions": {
+      "type": "object",
+      "additionalProperties": true
     }
   }
 }

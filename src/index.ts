@@ -1,7 +1,9 @@
+import fileLoader from "file-loader";
 import loaderUtils from "loader-utils";
 import validateOptions from "schema-utils";
 import { JSONSchema7 } from "schema-utils/declarations/validate";
 import sharp from "sharp";
+import { RawSourceMap } from "source-map";
 import { loader } from "webpack";
 
 import schema from "./options.json";
@@ -34,11 +36,16 @@ export interface OPTIONS {
     webp?: object;
     tiff?: object;
   };
+  fileLoaderOptions?: object;
 }
 
 export const raw = true;
 
-export default function (this: loader.LoaderContext, content: ArrayBuffer) {
+export default function (
+  this: loader.LoaderContext,
+  content: ArrayBuffer,
+  sourceMap?: RawSourceMap
+) {
   const callback = this.async();
   const options = loaderUtils.getOptions(this) as Readonly<OPTIONS> | null;
   const params = this.resourceQuery
@@ -74,10 +81,20 @@ export default function (this: loader.LoaderContext, content: ArrayBuffer) {
     data?.["webpack-image-resize-loader"]?.sharpOptions ??
     params?.sharpOptions ??
     options?.sharpOptions;
+  const fileLoaderOptions =
+    data?.["webpack-image-resize-loader"]?.fileLoaderOptions ??
+    params?.fileLoaderOptions ??
+    options?.fileLoaderOptions;
 
   processImage(content, { size, format, quality, scaleUp, sharpOptions })
     .then((result) => {
-      callback?.(null, result);
+      const fileLoaderContext = { ...this, query: fileLoaderOptions };
+      const fileLoaderResult = fileLoader.call(
+        fileLoaderContext,
+        result,
+        sourceMap
+      );
+      callback?.(null, fileLoaderResult);
     })
     .catch((e) => {
       throw e;
