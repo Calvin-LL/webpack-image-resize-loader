@@ -27,7 +27,6 @@ export interface OPTIONS {
   format?: "jpeg" | "png" | "webp" | "tiff";
   quality?: number;
   scaleUp?: boolean;
-  esModule?: boolean;
   sharpOptions?: {
     resize?: object;
     png?: object;
