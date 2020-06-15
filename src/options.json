@@ -1,0 +1,62 @@
+{
+  "additionalProperties": true,
+  "type": "object",
+  "required": ["size"],
+  "properties": {
+    "size": {
+      "description": "Size of output image.",
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 1
+        },
+        "height": {
+          "type": "number",
+          "minimum": 1
+        },
+        "fit": {
+          "enum": ["cover", "contain", "fill", "inside", "outside"]
+        },
+        "position": {
+          "enum": [
+            "top",
+            "right top",
+            "right",
+            "right bottom",
+            "bottom",
+            "left bottom",
+            "left",
+            "left top"
+          ]
+        },
+        "background": {
+          "anyOf": [{ "type": "string" }, { "type": "object" }]
+        }
+      }
+    },
+    "format": {
+      "description": "Format of the output image. Default to the same as the import image.",
+      "enum": ["jpeg", "png", "webp", "tiff"]
+    },
+    "quality": {
+      "description": "Quality of the output image. Only applies when the output format is JPEG or WebP. Default to 80",
+      "type": "number",
+      "minimum": 1
+    },
+    "scaleUp": {
+      "description": "When the image size is smaller than the desired image size, should the loader scale up the image? When false, output the original image. Default to false.",
+      "type": "boolean"
+    },
+    "sharpOptions": {
+      "type": "object",
+      "properties": {
+        "resize": { "type": "object", "additionalProperties": true },
+        "png": { "type": "object", "additionalProperties": true },
+        "jpeg": { "type": "object", "additionalProperties": true },
+        "webp": { "type": "object", "additionalProperties": true },
+        "tiff": { "type": "object", "additionalProperties": true }
+      }
+    }
+  }
+}
