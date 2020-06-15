@@ -52,11 +52,28 @@ export default function (this: loader.LoaderContext, content: ArrayBuffer) {
       baseDataPath: "options",
     });
 
-  const size = data?.size ?? params?.size ?? options?.size;
-  const format = data?.format ?? params?.format ?? options?.format;
-  const quality = data?.quality ?? params?.quality ?? options?.quality ?? 80;
-  const scaleUp = data?.scaleUp ?? params?.scaleUp ?? options?.scaleUp ?? false;
-  const sharpOptions = data?.esModule ?? params?.esModule ?? options?.esModule;
+  const size =
+    data?.["webpack-image-resize-loader"]?.size ??
+    params?.size ??
+    options?.size;
+  const format =
+    data?.["webpack-image-resize-loader"]?.format ??
+    params?.format ??
+    options?.format;
+  const quality =
+    data?.["webpack-image-resize-loader"]?.quality ??
+    params?.quality ??
+    options?.quality ??
+    80;
+  const scaleUp =
+    data?.["webpack-image-resize-loader"]?.scaleUp ??
+    params?.scaleUp ??
+    options?.scaleUp ??
+    false;
+  const sharpOptions =
+    data?.["webpack-image-resize-loader"]?.sharpOptions ??
+    params?.sharpOptions ??
+    options?.sharpOptions;
 
   processImage(content, { size, format, quality, scaleUp, sharpOptions })
     .then((result) => {
