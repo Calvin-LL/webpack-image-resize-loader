@@ -1,5 +1,9 @@
+import path from "path";
+
 import fileLoader from "file-loader";
 import loaderUtils from "loader-utils";
+import mime from "mime";
+import replaceExt from "replace-ext";
 import validateOptions from "schema-utils";
 import { JSONSchema7 } from "schema-utils/declarations/validate";
 import sharp from "sharp";
@@ -60,35 +64,41 @@ export default function (
     });
 
   const size =
-    data?.["webpack-image-resize-loader"]?.size ??
+    (data?.["webpack-image-resize-loader"]?.size as OPTIONS["size"]) ??
     params?.size ??
     options?.size;
   const format =
-    data?.["webpack-image-resize-loader"]?.format ??
+    (data?.["webpack-image-resize-loader"]?.format as OPTIONS["format"]) ??
     params?.format ??
     options?.format;
   const quality =
-    data?.["webpack-image-resize-loader"]?.quality ??
+    (data?.["webpack-image-resize-loader"]?.quality as OPTIONS["quality"]) ??
     params?.quality ??
     options?.quality ??
     80;
   const scaleUp =
-    data?.["webpack-image-resize-loader"]?.scaleUp ??
+    (data?.["webpack-image-resize-loader"]?.scaleUp as OPTIONS["scaleUp"]) ??
     params?.scaleUp ??
     options?.scaleUp ??
     false;
   const sharpOptions =
-    data?.["webpack-image-resize-loader"]?.sharpOptions ??
+    (data?.["webpack-image-resize-loader"]
+      ?.sharpOptions as OPTIONS["sharpOptions"]) ??
     params?.sharpOptions ??
     options?.sharpOptions;
   const fileLoaderOptions =
-    data?.["webpack-image-resize-loader"]?.fileLoaderOptions ??
+    (data?.["webpack-image-resize-loader"]
+      ?.fileLoaderOptions as OPTIONS["fileLoaderOptions"]) ??
     params?.fileLoaderOptions ??
     options?.fileLoaderOptions;
 
   processImage(content, { size, format, quality, scaleUp, sharpOptions })
     .then((result) => {
-      const fileLoaderContext = { ...this, query: fileLoaderOptions };
+      const fileLoaderContext = {
+        ...this,
+        resourcePath: replaceExtension(this.resourcePath, format),
+        query: fileLoaderOptions,
+      };
       const fileLoaderResult = fileLoader.call(
         fileLoaderContext,
         result,
@@ -137,4 +147,12 @@ async function processImage(
     resultSharp = resultSharp[format]({ quality, ...sharpOptions?.[format] });
 
   return await resultSharp.toBuffer();
+}
+
+function replaceExtension(resourcePath: string, format: string | undefined) {
+  if (!format) return resourcePath;
+  if (mime.getType(format) === mime.getType(path.extname(resourcePath)))
+    return resourcePath;
+
+  return replaceExt(resourcePath, `.${format}`);
 }

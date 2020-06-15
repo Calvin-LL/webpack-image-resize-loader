@@ -46,6 +46,8 @@
   "dependencies": {
     "file-loader": "^6.0.0",
     "loader-utils": "^2.0.0",
+    "mime": "^2.4.6",
+    "replace-ext": "^2.0.0",
     "schema-utils": "^2.7.0",
     "sharp": "^0.25.3"
   },
@@ -53,7 +55,9 @@
     "@types/file-loader": "^4.2.0",
     "@types/jest": "^26.0.0",
     "@types/loader-utils": "^2.0.0",
+    "@types/mime": "^2.0.2",
     "@types/node": "^14.0.13",
+    "@types/replace-ext": "0.0.27",
     "@types/sharp": "^0.25.0",
     "@types/webpack": "^4.41.17",
     "commitizen": "^4.1.2",
