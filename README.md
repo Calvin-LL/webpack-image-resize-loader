@@ -22,7 +22,7 @@ yarn add webpack-image-resize-loader --dev
 
 ## Usage
 
-Note: if you only want to shrink some but not all images, check out [webpack-query-loader](https://github.com/CoolCyberBrain/webpack-query-loader) or use webpack's `resourceQuery`
+Note: if you only want to shrink some but not all images, check out [webpack-query-loader](https://github.com/CoolCyberBrain/webpack-query-loader) or use webpack's `resourceQuery`. If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/CoolCyberBrain/webpack-image-srcset-loader)
 
 ```javascript
 module.exports = {
