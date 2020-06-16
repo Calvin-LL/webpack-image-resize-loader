@@ -1,10 +1,10 @@
-# webpack-image-resize-loader [![npm](https://img.shields.io/npm/v/webpack-image-resize-loader)](https://www.npmjs.com/package/webpack-image-resize-loader) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
+# webpack-image-resize-loader
 
-This loader generates a color or solid color image from a given image for use as a placeholder.
+[![npm](https://img.shields.io/npm/v/webpack-image-resize-loader)](https://www.npmjs.com/package/webpack-image-resize-loader) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
 
-Under the hood this package uses [fast-average-color](https://github.com/fast-average-color/fast-average-color). See [fast-average-color](https://github.com/fast-average-color/fast-average-color) for examples of colors derived from images.
+This loader resize the given images to the desired size.
 
-Supports JPEG, PNG, WebP, TIFF, GIF and SVG images.
+Supports JPEG, PNG, WebP, and, TIFF images.
 
 ## Install
 
@@ -22,27 +22,7 @@ yarn add webpack-image-resize-loader --dev
 
 ## Usage
 
-### Recommanded usage for Webpack v4
-
-#### Step 1
-
-##### Install [webpack-query-loader](https://github.com/CoolCyberBrain/webpack-query-loader)
-
-Install with npm:
-
-```bash
-npm install --save-dev webpack-query-loader
-```
-
-Install with yarn:
-
-```bash
-yarn add webpack-query-loader --dev
-```
-
-#### Step 2
-
-##### Configure [webpack-query-loader](https://github.com/CoolCyberBrain/webpack-query-loader)
+Note: if you only want to shrink some but not all images, check out [webpack-query-loader](https://github.com/CoolCyberBrain/webpack-query-loader) or use webpack's `resourceQuery`
 
 ```javascript
 module.exports = {
@@ -50,30 +30,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|svg)/i,
+        test: /\.(png|jpe?g|webp|tiff?)/i,
         use: [
           {
-            loader: "webpack-query-loader",
+            loader: "webpack-image-resize-loader",
             options: {
-              resourceQuery: "placeholder",
-              use: {
-                loader: "webpack-image-resize-loader",
-                options: {
-                  format: "base64",
-                  size: 1,
-                  color: "sqrt",
-                  backgroundColor: "#FFF"
-                }
-              }
-            },
-          },
-          {
-            loader: "webpack-query-loader",
-            options: {
-              resourceQuery: "!placeholder",
-              use: {
-                loader: "file-loader", // or whatever loaders you want to use
-              }
+              size: {
+                width: 1000,
+              },
+              format: "webp",
+              quality: 80,
             },
           },
         ],
@@ -84,95 +50,119 @@ module.exports = {
 
 ```
 
-#### Step 3
-
-##### Use in code
+#### You can override options with queries
 
 ```javascript
-import placeholderUrl from "./some_pic.png?placeholder";
+import placeholderUrl from "./some_pic.png?{size:{width:500}}";
 ```
 
-To override options for one import, you can use queries
+or
 
 ```javascript
-import placeholderUrl from "./some_pic.png?placeholder&size=original";
+import placeholderUrl from "./some_pic.png?quality=100";
 ```
-
-### Other usage for Webpack v4
-
-With default options:
-
-```javascript
-import placeholderUrl from "!!webpack-image-resize-loader!./some_pic.png";
-```
-
-With specified options:
-
-```javascript
-import placeholderUrl from "!!webpack-image-resize-loader!./some_pic.png?format=base64&size=1&color=sqrt&backgroundColor=white";
-```
-
-### Recommanded usage for Webpack v5
-
-Just use resourceQuery
 
 ## Options
 
-|                   Name                    |                 Type                 |  Default   |                                                                                                                       Description                                                                                                                        |
-| :---------------------------------------: | :----------------------------------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|          **[`format`](#format)**          | `"base64", "hex", "rgb", or "array"` | `"base64"` |                                                                                                                 The format of the output                                                                                                                 |
-|            **[`size`](#size)**            |        `number or "original"`        |    `1`     |                                                                             The size of the output image if `format` is `"base64"`, no effect if the format is anything else                                                                             |
-|           **[`color`](#color)**           |          `{string\|object}`          |  `"sqrt"`  | An [algorithm](https://github.com/fast-average-color/fast-average-color/blob/master/docs/algorithms.md) ("simple", "sqrt" or "dominant") to generate a color from a given image, or a color string or color object to use in generating the output image |
-| **[`backgroundColor`](#backgroundColor)** |          `{string\|object}`          |  `"#FFF"`  |                                                                                             The background color to use if the given image has transparency                                                                                              |
-|        **[`esModule`](#esModule)**        |              `boolean`               |   `true`   |                                                                                          Whether the export is in ES modules syntax or CommonJS modules syntax                                                                                           |
-
-### `format`
-
-With
-
-```javascript
-import placeholderUrl from "./some_pic.png?placeholder";
-```
-
-- `format: "base64"`: `placeholderUrl === "data:image/png;base64,iVBORw0KG..."`
-- `format: "hex"`: `placeholderUrl === "#6b7548"`
-- `format: "rgb"`: `placeholderUrl === "rgb(107, 117, 72)"`
-- `format: "array"`: `placeholderUrl === [107, 117, 72]"`
+| Name                                          | Type                                     | Default                                       | Description                                                                               |
+| --------------------------------------------- | ---------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **[`size`](#size)**                           | `object`                                 | `undefined`                                   | The size of the output image.                                                             |
+| **[`format`](#format)**                       | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"` | `undefined`                                   | The format of the output file.                                                            |
+| **[`scaleUp`](#scaleUp)**                     | `boolean`                                | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size. |
+| **[`quality`](#quality)**                     | `number`                                 | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                          |
+| **[`sharpOptions`](#sharpOptions)**           | `object`                                 | `undefined`                                   | Additional options for [sharp](https://sharp.pixelplumbing.com).                          |
+| **[`fileLoaderOptions`](#fileLoaderOptions)** | `object`                                 | `undefined`                                   | Additional options for [file-loader](https://github.com/webpack-contrib/file-loader).     |
 
 ### `size`
 
-`size` will only take effect if `format: "base64"`. When `size` is a number, the output image will be a square of the given number of pixels. When `size: "original"`, the output image will be the size of the original image.
+This field is required.
 
-### `color`
+#### `width`
 
-`color` can be an [algorithm](https://github.com/fast-average-color/fast-average-color/blob/master/docs/algorithms.md) ("simple", "sqrt" or "dominant") to generate a color from a given image (see examples in [algorithm](https://github.com/fast-average-color/fast-average-color/blob/master/docs/algorithms.md)), or a color string or color object to use in generating the output image.
+type: `number`
 
-A color string or color object is any valid colors accepted by [TinyColor](https://github.com/bgrins/TinyColor).
+default: `undefined`
 
-For example:
+pixels wide the resultant image should be. Use `null` or `undefined` to auto-scale the width to match the height.
+
+this is passed as `width` to the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+
+#### `height`
+
+type: `number`
+
+default: `undefined`
+
+pixels high the resultant image should be. Use null or undefined to auto-scale the height to match the width.
+
+this is passed as `height` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+
+#### `fit`
+
+type: `"cover"`, `"contain"`, `"fill"`, `"inside"`, or `"outside"`
+
+default: `"cover"`
+
+how the image should be resized to fit both provided dimensions.
+
+this is passed as `fit` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+
+#### `position`
+
+type: `"north"`, `"northeast"`, `"east"`, `"southeast"`, `"south"`, `"southwest"`, `"west"`, `"northwest"`, `"center"`, `"centre"`, `"entropy"`, or `"attention"`
+
+default: `"centre"`
+
+position, gravity or strategy to use when `fit` is `cover` or `contain`.
+
+- `sharp.position`: `top`, `right top`, `right`, `right bottom`, `bottom`, `left bottom`, `left`, `left top`.
+- `sharp.gravity`: `north`, `northeast`, `east`, `southeast`, `south`, `southwest`, `west`, `northwest`, `center` or `centre`.
+- `sharp.strategy`: `cover` only, dynamically crop using either the `entropy` or `attention` strategy.
+
+this is passed as `position` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+
+#### `background`
+
+type: `{string\|object}`
+
+default: `{r:0,g:0,b:0,alpha:1}`
+
+example: `"#7743CE"`, `"rgb(255, 255, 255)"`, `{r:0,g:0,b:0,alpha:1}`
+
+background colour when using a `fit` of `contain`, parsed by the [color](https://www.npmjs.com/package/color) module, defaults to black without transparency.
+
+this is passed as `background` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+
+### `format`
+
+When unspecified, outputs the same format as the imported file.
+
+### `scaleUp`
+
+When true, images will be scaled up to a larger size. When false, if the desired size, either the desired height is greater than the height of the original image, or the desired width is greater than the width of the original image, the size of the output image will be the same as the imported image.
+
+### `quality`
+
+From 1-100, 1 being most compression and worst quality, 100 being least compression and best quality.
+
+This is passed as `quality` in the [the parameters of sharp's png, jpeg, webp, and png function](https://sharp.pixelplumbing.com/api-output)
+
+### `sharpOptions`
+
+sharpOptions can have any of the following keys: `resize`, `png`, `jpeg`, `webp`, and `tiff`. These options will override options specified above.
+
+as in
 
 ```javascript
 {
-  color: "white",
-  format: "base64"
+  resize: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-resize#parameters
+  png: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#png
+  jpeg: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#jpeg
+  webp: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#webp
+  tiff: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#tiff
 }
 ```
 
-will output a white pixel.
+### `fileLoaderOptions`
 
-```javascript
-{
-  color: "white",
-  format: "hex"
-}
-```
-
-will output `#FFFFFF`
-
-### `backgroundColor`
-
-If an image has transparency, `backgroundColor` will be used as the background color. By default `backgroundColor` is white.
-
-### `esModule`
-
-Whether the export is in ES modules syntax or CommonJS modules syntax. If you don't know what it is or whether or not you need it, leave is as default.
+fileLoaderOptions is passed as the options object internally to [file-loader](https://github.com/webpack-contrib/file-loader) to save a file. Go to [file-loader](https://github.com/webpack-contrib/file-loader) to find the available options.
