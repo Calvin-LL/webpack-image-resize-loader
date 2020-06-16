@@ -41,7 +41,7 @@ export interface SIZE {
 }
 
 export interface OPTIONS {
-  size: SIZE;
+  size?: SIZE;
   format?: "jpeg" | "png" | "webp" | "tiff";
   quality?: number;
   scaleUp?: boolean;
@@ -67,41 +67,21 @@ export default function (
   const params = this.resourceQuery
     ? (loaderUtils.parseQuery(this.resourceQuery) as Partial<OPTIONS>)
     : undefined;
-  const data = this.data;
 
   if (options)
     validateOptions(schema as JSONSchema7, options, {
-      name: "Image Placeholder Loader",
+      name: "Image Resize Loader",
       baseDataPath: "options",
     });
 
-  const size =
-    (data?.["webpack-image-resize-loader"]?.size as OPTIONS["size"]) ??
-    params?.size ??
-    options?.size;
+  const size = params?.size ?? options?.size;
   const format =
-    (data?.["webpack-image-resize-loader"]?.format as OPTIONS["format"]) ??
-    params?.format ??
-    options?.format;
-  const quality =
-    (data?.["webpack-image-resize-loader"]?.quality as OPTIONS["quality"]) ??
-    params?.quality ??
-    options?.quality;
-  const scaleUp =
-    (data?.["webpack-image-resize-loader"]?.scaleUp as OPTIONS["scaleUp"]) ??
-    params?.scaleUp ??
-    options?.scaleUp ??
-    false;
-  const sharpOptions =
-    (data?.["webpack-image-resize-loader"]
-      ?.sharpOptions as OPTIONS["sharpOptions"]) ??
-    params?.sharpOptions ??
-    options?.sharpOptions;
+    params?.format ?? options?.format ?? getFormat(this.resourcePath);
+  const quality = params?.quality ?? options?.quality;
+  const scaleUp = params?.scaleUp ?? options?.scaleUp ?? false;
+  const sharpOptions = params?.sharpOptions ?? options?.sharpOptions;
   const fileLoaderOptions =
-    (data?.["webpack-image-resize-loader"]
-      ?.fileLoaderOptions as OPTIONS["fileLoaderOptions"]) ??
-    params?.fileLoaderOptions ??
-    options?.fileLoaderOptions;
+    params?.fileLoaderOptions ?? options?.fileLoaderOptions;
 
   processImage(content, { size, format, quality, scaleUp, sharpOptions })
     .then((result) => {
@@ -166,4 +146,19 @@ function replaceExtension(resourcePath: string, format: string | undefined) {
     return resourcePath;
 
   return replaceExt(resourcePath, `.${format}`);
+}
+
+function getFormat(resourcePath: string): OPTIONS["format"] | undefined {
+  const type = mime.getType(resourcePath);
+
+  switch (type) {
+    case "image/jpeg":
+      return "jpeg";
+    case "image/png":
+      return "png";
+    case "image/webp":
+      return "webp";
+    case "image/tiff":
+      return "tiff";
+  }
 }
