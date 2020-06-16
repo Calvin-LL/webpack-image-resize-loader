@@ -24,7 +24,19 @@ export interface SIZE {
     | "bottom"
     | "left bottom"
     | "left"
-    | "left top";
+    | "left top"
+    | "north"
+    | "northeast"
+    | "east"
+    | "southeast"
+    | "south"
+    | "southwest"
+    | "west"
+    | "northwest"
+    | "center"
+    | "centre"
+    | "entropy"
+    | "attention";
   background?: string | object;
 }
 
@@ -74,8 +86,7 @@ export default function (
   const quality =
     (data?.["webpack-image-resize-loader"]?.quality as OPTIONS["quality"]) ??
     params?.quality ??
-    options?.quality ??
-    80;
+    options?.quality;
   const scaleUp =
     (data?.["webpack-image-resize-loader"]?.scaleUp as OPTIONS["scaleUp"]) ??
     params?.scaleUp ??

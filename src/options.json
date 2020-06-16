@@ -4,7 +4,7 @@
   "required": ["size"],
   "properties": {
     "size": {
-      "description": "Size of output image.",
+      "description": "The size of the output image. This field is required.",
       "type": "object",
       "properties": {
         "width": {
@@ -27,7 +27,21 @@
             "bottom",
             "left bottom",
             "left",
-            "left top"
+            "left top",
+
+            "north",
+            "northeast",
+            "east",
+            "southeast",
+            "south",
+            "southwest",
+            "west",
+            "northwest",
+            "center",
+            "centre",
+
+            "entropy",
+            "attention"
           ]
         },
         "background": {
@@ -36,16 +50,16 @@
       }
     },
     "format": {
-      "description": "Format of the output image. Default to the same as the import image.",
+      "description": "The format of the output file. When unspecified, outputs the same format as the imported file.",
       "enum": ["jpeg", "png", "webp", "tiff"]
     },
     "quality": {
-      "description": "Quality of the output image. Only applies when the output format is JPEG or WebP. Default to 80",
+      "description": "The quality of the output image. Default to 80 for JPEG, WebP, and TIFF, default to 100 for PNG.",
       "type": "number",
       "minimum": 1
     },
     "scaleUp": {
-      "description": "When the image size is smaller than the desired image size, should the loader scale up the image? When false, output the original image. Default to false.",
+      "description": "Whether or not to scale up the image when the desired size is larger than the image size. Default to false.",
       "type": "boolean"
     },
     "sharpOptions": {
