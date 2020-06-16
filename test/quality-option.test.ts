@@ -19,4 +19,18 @@ describe('"quality" option', () => {
       execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
     ).toMatchSnapshot("result");
   });
+
+  it("should work with 1", async () => {
+    const compiler = getCompiler({
+      size: {
+        width: 10,
+      },
+      quality: 1,
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
+    ).toMatchSnapshot("result");
+  });
 });
