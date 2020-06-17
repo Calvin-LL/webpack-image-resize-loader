@@ -39,6 +39,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
+          registry-url: https://registry.npmjs.org
       - uses: actions/cache@v2
         with:
           path: ~/.npm
@@ -58,3 +59,7 @@ jobs:
           body: See [CHANGELOG.md](https://github.com/CoolCyberBrain/webpack-image-resize-loader/blob/master/CHANGELOG.md)
           draft: false
           prerelease: false
+      - name: Publish on NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
