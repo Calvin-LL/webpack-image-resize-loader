@@ -1,5 +1,6 @@
 import path from "path";
 
+import merge from "deepmerge";
 import fileLoader from "file-loader";
 import loaderUtils from "loader-utils";
 import mime from "mime";
@@ -64,24 +65,23 @@ export default function (
 ) {
   const callback = this.async();
   const options = loaderUtils.getOptions(this) as Readonly<OPTIONS> | null;
-  const params = this.resourceQuery
+  const queryObject = this.resourceQuery
     ? (loaderUtils.parseQuery(this.resourceQuery) as Partial<OPTIONS>)
     : undefined;
+  const fullOptions = merge(queryObject ?? {}, options ?? {});
 
-  if (options)
-    validateOptions(schema as JSONSchema7, options, {
+  if (fullOptions)
+    validateOptions(schema as JSONSchema7, fullOptions, {
       name: "Image Resize Loader",
       baseDataPath: "options",
     });
 
-  const size = params?.size ?? options?.size;
-  const format =
-    params?.format ?? options?.format ?? getFormat(this.resourcePath);
-  const quality = params?.quality ?? options?.quality;
-  const scaleUp = params?.scaleUp ?? options?.scaleUp ?? false;
-  const sharpOptions = params?.sharpOptions ?? options?.sharpOptions;
-  const fileLoaderOptions =
-    params?.fileLoaderOptions ?? options?.fileLoaderOptions;
+  const size = fullOptions.size;
+  const format = fullOptions.format ?? getFormat(this.resourcePath);
+  const quality = fullOptions.quality;
+  const scaleUp = fullOptions.scaleUp ?? false;
+  const sharpOptions = fullOptions.sharpOptions;
+  const fileLoaderOptions = fullOptions.fileLoaderOptions;
 
   processImage(content, { size, format, quality, scaleUp, sharpOptions })
     .then((result) => {
