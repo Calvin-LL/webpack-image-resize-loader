@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`"scale" option should work with 0.5: result 1`] = `"44aacd9d8d250c420d100a3fb0f1debe.jpg"`;
+
+exports[`"scale" option should work with 1: result 1`] = `"fdaf70a107ad3cebfaf1e03ff0601c1c.jpg"`;

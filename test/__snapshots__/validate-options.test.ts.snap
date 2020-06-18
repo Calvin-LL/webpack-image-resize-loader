@@ -13,6 +13,30 @@ exports[`validate options should throw an error on the "quality" option with 0 v
    -> The quality of the output image. Default to 80 for JPEG, WebP, and TIFF, default to 100 for PNG."
 `;
 
+exports[`validate options should throw an error on the "scale" option with -1 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.scale should be = 1.
+   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
+`;
+
+exports[`validate options should throw an error on the "scale" option with 0 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.scale should be = 1.
+   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
+`;
+
+exports[`validate options should throw an error on the "scale" option with 1.1 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.scale should be = 1.
+   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
+`;
+
+exports[`validate options should throw an error on the "scale" option with 2 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.scale should be = 1.
+   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
+`;
+
 exports[`validate options should throw an error on the "scaleUp" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.scaleUp should be a boolean.
@@ -29,12 +53,5 @@ exports[`validate options should throw an error on the "size" option with true v
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.size should be an object:
    object { width?, height?, fit?, position?, background?, … }
-   -> The size of the output image. This field is required."
-`;
-
-exports[`validate options should throw an error on the "size" option with undefined value 1`] = `
-"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options misses the property 'size'. Should be:
-   object { width?, height?, fit?, position?, background?, … }
-   -> The size of the output image. This field is required."
+   -> The size of the output image."
 `;

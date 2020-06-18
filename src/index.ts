@@ -43,6 +43,7 @@ export interface SIZE {
 
 export interface OPTIONS {
   size?: SIZE;
+  scale?: number;
   format?: "jpeg" | "png" | "webp" | "tiff";
   quality?: number;
   scaleUp?: boolean;
@@ -77,13 +78,14 @@ export default function (
     });
 
   const size = fullOptions.size;
+  const scale = fullOptions.scale;
   const format = fullOptions.format ?? getFormat(this.resourcePath);
   const quality = fullOptions.quality;
   const scaleUp = fullOptions.scaleUp ?? false;
   const sharpOptions = fullOptions.sharpOptions;
   const fileLoaderOptions = fullOptions.fileLoaderOptions;
 
-  processImage(content, { size, format, quality, scaleUp, sharpOptions })
+  processImage(content, { size, scale, format, quality, scaleUp, sharpOptions })
     .then((result) => {
       const fileLoaderContext = {
         ...this,
@@ -106,6 +108,7 @@ async function processImage(
   content: ArrayBuffer,
   {
     size,
+    scale,
     format,
     quality,
     scaleUp,
@@ -124,7 +127,12 @@ async function processImage(
 
   let resultSharp = sharpImage;
 
-  if (
+  if (scale) {
+    resultSharp = sharpImage.resize({
+      width: Math.round(normalizedImageWidth * scale),
+      ...sharpOptions?.resize,
+    });
+  } else if (
     scaleUp ||
     (normalizedResultHeight <= normalizedImageHeight &&
       normalizedResultWidth <= normalizedImageWidth)

@@ -64,18 +64,17 @@ import placeholderUrl from "./some_pic.png?quality=100";
 
 ## Options
 
-| Name                                          | Type                                     | Default                                       | Description                                                                               |
-| --------------------------------------------- | ---------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **[`size`](#size)**                           | `object`                                 | `undefined`                                   | The size of the output image.                                                             |
-| **[`format`](#format)**                       | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"` | `undefined`                                   | The format of the output file.                                                            |
-| **[`scaleUp`](#scaleUp)**                     | `boolean`                                | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size. |
-| **[`quality`](#quality)**                     | `number`                                 | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                          |
-| **[`sharpOptions`](#sharpOptions)**           | `object`                                 | `undefined`                                   | Additional options for [sharp](https://sharp.pixelplumbing.com).                          |
-| **[`fileLoaderOptions`](#fileLoaderOptions)** | `object`                                 | `undefined`                                   | Additional options for [file-loader](https://github.com/webpack-contrib/file-loader).     |
+| Name                                          | Type                                     | Default                                       | Description                                                                                                      |
+| --------------------------------------------- | ---------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **[`size`](#size)**                           | `object`                                 | `undefined`                                   | The size of the output image.                                                                                    |
+| **[`scale`](#scale)**                         | `number`                                 | `undefined`                                   | The fraction of the original size of the output image. If both this and `size` are set, `size` takes precedence. |
+| **[`format`](#format)**                       | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"` | `undefined`                                   | The format of the output file.                                                                                   |
+| **[`scaleUp`](#scaleUp)**                     | `boolean`                                | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size.                        |
+| **[`quality`](#quality)**                     | `number`                                 | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                                                 |
+| **[`sharpOptions`](#sharpOptions)**           | `object`                                 | `undefined`                                   | Additional options for [sharp](https://sharp.pixelplumbing.com).                                                 |
+| **[`fileLoaderOptions`](#fileLoaderOptions)** | `object`                                 | `undefined`                                   | Additional options for [file-loader](https://github.com/webpack-contrib/file-loader).                            |
 
 ### `size`
-
-This field is required.
 
 #### `width`
 
@@ -132,6 +131,14 @@ example: `"#7743CE"`, `"rgb(255, 255, 255)"`, `{r:0,g:0,b:0,alpha:1}`
 background colour when using a `fit` of `contain`, parsed by the [color](https://www.npmjs.com/package/color) module, defaults to black without transparency.
 
 this is passed as `background` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+
+### `scale`
+
+type: `number`
+
+default: `undefined`
+
+A number between 0 and 1 (including 1), 1 being the original size, 0.5 being half the size of the original image.
 
 ### `format`
 

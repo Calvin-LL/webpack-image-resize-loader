@@ -11,7 +11,11 @@ describe("validate options", () => {
           width: 10,
         },
       ],
-      failure: [true, undefined],
+      failure: [true],
+    },
+    scale: {
+      success: [0.1, 0.5, 1],
+      failure: [-1, 0, 1.1, 2],
     },
     format: {
       success: ["jpeg", "png", "webp", "tiff"],
