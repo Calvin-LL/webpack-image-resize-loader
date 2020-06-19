@@ -1,6 +1,5 @@
 import path from "path";
 
-import merge from "deepmerge";
 import fileLoader from "file-loader";
 import loaderUtils from "loader-utils";
 import mime from "mime";
@@ -13,7 +12,7 @@ import { loader } from "webpack";
 
 import schema from "./options.json";
 
-export interface SIZE {
+export interface OPTIONS {
   width?: number;
   height?: number;
   fit?: "cover" | "contain" | "fill" | "inside" | "outside";
@@ -39,10 +38,6 @@ export interface SIZE {
     | "entropy"
     | "attention";
   background?: string | object;
-}
-
-export interface OPTIONS {
-  size?: SIZE;
   scale?: number;
   format?: "jpeg" | "png" | "webp" | "tiff";
   quality?: number;
@@ -69,27 +64,28 @@ export default function (
   const queryObject = this.resourceQuery
     ? (loaderUtils.parseQuery(this.resourceQuery) as Partial<OPTIONS>)
     : undefined;
-  const fullOptions = merge(options ?? {}, queryObject ?? {});
+  const fullOptions = { ...options, ...queryObject };
 
   validateOptions(schema as JSONSchema7, fullOptions, {
     name: "Image Resize Loader",
     baseDataPath: "options",
   });
 
-  const size = fullOptions.size;
-  const scale = fullOptions.scale;
-  const format = fullOptions.format ?? getFormat(this.resourcePath);
-  const quality = fullOptions.quality;
-  const scaleUp = fullOptions.scaleUp ?? false;
-  const sharpOptions = fullOptions.sharpOptions;
-  const fileLoaderOptions = fullOptions.fileLoaderOptions;
+  const fullOptionsWithDefaults = {
+    format: getFormat(this.resourcePath),
+    scaleUp: false,
+    ...fullOptions,
+  };
 
-  processImage(content, { size, scale, format, quality, scaleUp, sharpOptions })
+  processImage(content, fullOptionsWithDefaults)
     .then((result) => {
       const fileLoaderContext = {
         ...this,
-        resourcePath: replaceExtension(this.resourcePath, format),
-        query: fileLoaderOptions,
+        resourcePath: replaceExtension(
+          this.resourcePath,
+          fullOptionsWithDefaults.format
+        ),
+        query: fullOptionsWithDefaults.fileLoaderOptions,
       };
       const fileLoaderResult = fileLoader.call(
         fileLoaderContext,
@@ -106,28 +102,30 @@ export default function (
 async function processImage(
   content: ArrayBuffer,
   {
-    size,
+    width,
+    height,
+    fit,
+    position,
+    background,
     scale,
     format,
     quality,
     scaleUp,
     sharpOptions,
-  }: Omit<Readonly<OPTIONS>, "esModule">
+  }: Readonly<OPTIONS>
 ) {
-  const sharpImage = sharp(Buffer.from(content));
+  let sharpImage = sharp(Buffer.from(content));
   const {
     height: imageHeight,
     width: imageWidth,
   } = await sharpImage.metadata();
   const normalizedImageHeight = imageHeight ?? Number.MAX_VALUE;
   const normalizedImageWidth = imageWidth ?? Number.MAX_VALUE;
-  const normalizedResultHeight = size?.height ?? 0;
-  const normalizedResultWidth = size?.width ?? 0;
-
-  let resultSharp = sharpImage;
+  const normalizedResultHeight = height ?? 0;
+  const normalizedResultWidth = width ?? 0;
 
   if (scale) {
-    resultSharp = sharpImage.resize({
+    sharpImage = sharpImage.resize({
       width: Math.round(normalizedImageWidth * scale),
       ...sharpOptions?.resize,
     });
@@ -136,15 +134,19 @@ async function processImage(
     (normalizedResultHeight <= normalizedImageHeight &&
       normalizedResultWidth <= normalizedImageWidth)
   )
-    resultSharp = sharpImage.resize({
-      ...size,
+    sharpImage = sharpImage.resize({
+      width,
+      height,
+      fit,
+      position,
+      background,
       ...sharpOptions?.resize,
     });
 
   if (format)
-    resultSharp = resultSharp[format]({ quality, ...sharpOptions?.[format] });
+    sharpImage = sharpImage[format]({ quality, ...sharpOptions?.[format] });
 
-  return await resultSharp.toBuffer();
+  return await sharpImage.toBuffer();
 }
 
 function replaceExtension(resourcePath: string, format: string | undefined) {

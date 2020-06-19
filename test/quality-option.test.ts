@@ -8,9 +8,7 @@ import readAsset from "./helpers/readAsset";
 describe('"quality" option', () => {
   it("should work with 80", async () => {
     const compiler = getCompiler({
-      size: {
-        width: 10,
-      },
+      width: 10,
       quality: 80,
     });
     const stats = await compile(compiler);
@@ -22,9 +20,7 @@ describe('"quality" option', () => {
 
   it("should work with 1", async () => {
     const compiler = getCompiler({
-      size: {
-        width: 10,
-      },
+      width: 10,
       quality: 1,
     });
     const stats = await compile(compiler);

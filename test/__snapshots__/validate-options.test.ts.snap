@@ -1,10 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`validate options should throw an error on the "background" option with 9 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.background should be one of these:
+   string | object { … }
+   Details:
+    * options.background should be a string.
+    * options.background should be an object:
+      object { … }"
+`;
+
+exports[`validate options should throw an error on the "background" option with false value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.background should be one of these:
+   string | object { … }
+   Details:
+    * options.background should be a string.
+    * options.background should be an object:
+      object { … }"
+`;
+
+exports[`validate options should throw an error on the "fit" option with "0" value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.fit should be one of these:
+   \\"cover\\" | \\"contain\\" | \\"fill\\" | \\"inside\\" | \\"outside\\""
+`;
+
+exports[`validate options should throw an error on the "fit" option with true value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.fit should be one of these:
+   \\"cover\\" | \\"contain\\" | \\"fill\\" | \\"inside\\" | \\"outside\\""
+`;
+
 exports[`validate options should throw an error on the "format" option with true value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.format should be one of these:
    \\"jpeg\\" | \\"png\\" | \\"webp\\" | \\"tiff\\"
    -> The format of the output file. When unspecified, outputs the same format as the imported file."
+`;
+
+exports[`validate options should throw an error on the "height" option with 0 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.height should be >= 1."
+`;
+
+exports[`validate options should throw an error on the "height" option with 0.1 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.height should be >= 1."
+`;
+
+exports[`validate options should throw an error on the "height" option with true value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.height should be a number (should be >= 1)."
+`;
+
+exports[`validate options should throw an error on the "position" option with "0" value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.position should be one of these:
+   \\"top\\" | \\"right top\\" | \\"right\\" | \\"right bottom\\" | \\"bottom\\" | \\"left bottom\\" | \\"left\\" | \\"left top\\" | \\"north\\" | \\"northeast\\" | \\"east\\" | \\"southeast\\" | \\"south\\" | \\"southwest\\" | \\"west\\" | \\"northwest\\" | \\"center\\" | \\"centre\\" | \\"entropy\\" | \\"attention\\""
+`;
+
+exports[`validate options should throw an error on the "position" option with true value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.position should be one of these:
+   \\"top\\" | \\"right top\\" | \\"right\\" | \\"right bottom\\" | \\"bottom\\" | \\"left bottom\\" | \\"left\\" | \\"left top\\" | \\"north\\" | \\"northeast\\" | \\"east\\" | \\"southeast\\" | \\"south\\" | \\"southwest\\" | \\"west\\" | \\"northwest\\" | \\"center\\" | \\"centre\\" | \\"entropy\\" | \\"attention\\""
 `;
 
 exports[`validate options should throw an error on the "quality" option with 0 value 1`] = `
@@ -49,9 +108,17 @@ exports[`validate options should throw an error on the "sharpOptions" option wit
    object { resize?, png?, jpeg?, webp?, tiff?, … }"
 `;
 
-exports[`validate options should throw an error on the "size" option with true value 1`] = `
+exports[`validate options should throw an error on the "width" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.size should be an object:
-   object { width?, height?, fit?, position?, background?, … }
-   -> The size of the output image."
+ - options.width should be >= 1."
+`;
+
+exports[`validate options should throw an error on the "width" option with 0.1 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.width should be >= 1."
+`;
+
+exports[`validate options should throw an error on the "width" option with true value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.width should be a number (should be >= 1)."
 `;

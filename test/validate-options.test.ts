@@ -5,13 +5,48 @@ import getCompiler from "./helpers/getCompiler";
 
 describe("validate options", () => {
   const tests = {
-    size: {
+    width: {
+      success: [10],
+      failure: [true, 0, 0.1],
+    },
+    height: {
+      success: [10],
+      failure: [true, 0, 0.1],
+    },
+    fit: {
+      success: ["cover", "contain", "fill", "inside", "outside"],
+      failure: [true, "0"],
+    },
+    position: {
       success: [
-        {
-          width: 10,
-        },
+        "top",
+        "right top",
+        "right",
+        "right bottom",
+        "bottom",
+        "left bottom",
+        "left",
+        "left top",
+
+        "north",
+        "northeast",
+        "east",
+        "southeast",
+        "south",
+        "southwest",
+        "west",
+        "northwest",
+        "center",
+        "centre",
+
+        "entropy",
+        "attention",
       ],
-      failure: [true],
+      failure: [true, "0"],
+    },
+    background: {
+      success: ["#FFF", "rgb(2,4,99)", { r: 255, g: 255, b: 255 }],
+      failure: [false, 9],
     },
     scale: {
       success: [0.1, 0.5, 1],
@@ -44,9 +79,7 @@ describe("validate options", () => {
       type === "success" ? "successfully validate" : "throw an error on"
     } the "${key}" option with ${JSON.stringify(value)} value`, async () => {
       const compiler = getCompiler({
-        size: {
-          width: 10,
-        },
+        width: 10,
         ...{ [key]: value },
       });
 

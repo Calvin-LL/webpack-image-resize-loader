@@ -2,51 +2,45 @@
   "additionalProperties": true,
   "type": "object",
   "properties": {
-    "size": {
-      "description": "The size of the output image.",
-      "type": "object",
-      "properties": {
-        "width": {
-          "type": "number",
-          "minimum": 1
-        },
-        "height": {
-          "type": "number",
-          "minimum": 1
-        },
-        "fit": {
-          "enum": ["cover", "contain", "fill", "inside", "outside"]
-        },
-        "position": {
-          "enum": [
-            "top",
-            "right top",
-            "right",
-            "right bottom",
-            "bottom",
-            "left bottom",
-            "left",
-            "left top",
+    "width": {
+      "type": "number",
+      "minimum": 1
+    },
+    "height": {
+      "type": "number",
+      "minimum": 1
+    },
+    "fit": {
+      "enum": ["cover", "contain", "fill", "inside", "outside"]
+    },
+    "position": {
+      "enum": [
+        "top",
+        "right top",
+        "right",
+        "right bottom",
+        "bottom",
+        "left bottom",
+        "left",
+        "left top",
 
-            "north",
-            "northeast",
-            "east",
-            "southeast",
-            "south",
-            "southwest",
-            "west",
-            "northwest",
-            "center",
-            "centre",
+        "north",
+        "northeast",
+        "east",
+        "southeast",
+        "south",
+        "southwest",
+        "west",
+        "northwest",
+        "center",
+        "centre",
 
-            "entropy",
-            "attention"
-          ]
-        },
-        "background": {
-          "anyOf": [{ "type": "string" }, { "type": "object" }]
-        }
-      }
+        "entropy",
+        "attention"
+      ]
+    },
+    "background": {
+      "anyOf": [{ "type": "string" }, { "type": "object" }]
     },
     "scale": {
       "description": "The fraction of the original size of the output image. If both this and `size` are set, `size` takes precedence.",

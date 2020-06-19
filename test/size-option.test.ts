@@ -8,9 +8,7 @@ import readAsset from "./helpers/readAsset";
 describe('"size" option', () => {
   it("should work with { width: 10 }", async () => {
     const compiler = getCompiler({
-      size: {
-        width: 10,
-      },
+      width: 10,
     });
     const stats = await compile(compiler);
 
@@ -21,9 +19,7 @@ describe('"size" option', () => {
 
   it("should work with { width: 10000000 }", async () => {
     const compiler = getCompiler({
-      size: {
-        width: 10000000,
-      },
+      width: 10000000,
     });
     const stats = await compile(compiler);
 
