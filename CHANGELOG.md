@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v1.1.1...v2.0.0) (2020-06-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **options:** options structure changed
+
+* **options:** change options structure ([ddf7e6e](https://github.com/CoolCyberBrain/webpack-image-resize-loader/commit/ddf7e6e767bdbf8b151d69b8dfb477827615f2f5))
+
 ### [1.1.1](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v1.1.0...v1.1.1) (2020-06-19)
 
 
