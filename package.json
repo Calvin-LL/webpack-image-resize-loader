@@ -1,6 +1,6 @@
 {
   "name": "webpack-image-resize-loader",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Resize imported images",
   "keywords": [
     "webpack",
