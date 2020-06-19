@@ -10,8 +10,17 @@
       "type": "number",
       "minimum": 1
     },
+    "scale": {
+      "description": "The fraction of the original size of the output image. If both this and `width` or `height` are set, `width` or `height` takes precedence.",
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
     "fit": {
       "enum": ["cover", "contain", "fill", "inside", "outside"]
+    },
+    "scaleUp": {
+      "description": "Whether or not to scale up the image when the desired size is larger than the image size. Default to false.",
+      "type": "boolean"
     },
     "position": {
       "enum": [
@@ -42,12 +51,6 @@
     "background": {
       "anyOf": [{ "type": "string" }, { "type": "object" }]
     },
-    "scale": {
-      "description": "The fraction of the original size of the output image. If both this and `size` are set, `size` takes precedence.",
-      "type": "number",
-      "exclusiveMinimum": 0,
-      "maximum": 1
-    },
     "format": {
       "description": "The format of the output file. When unspecified, outputs the same format as the imported file.",
       "enum": ["jpeg", "png", "webp", "tiff"]
@@ -56,10 +59,6 @@
       "description": "The quality of the output image. Default to 80 for JPEG, WebP, and TIFF, default to 100 for PNG.",
       "type": "number",
       "minimum": 1
-    },
-    "scaleUp": {
-      "description": "Whether or not to scale up the image when the desired size is larger than the image size. Default to false.",
-      "type": "boolean"
     },
     "sharpOptions": {
       "type": "object",
