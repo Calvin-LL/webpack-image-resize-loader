@@ -50,7 +50,7 @@ describe("validate options", () => {
     },
     scale: {
       success: [0.1, 0.5, 1],
-      failure: [-1, 0, 1.1, 2],
+      failure: [-1, 0],
     },
     format: {
       success: ["jpeg", "png", "webp", "tiff"],

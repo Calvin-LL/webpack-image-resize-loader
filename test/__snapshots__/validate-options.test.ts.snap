@@ -74,26 +74,14 @@ exports[`validate options should throw an error on the "quality" option with 0 v
 
 exports[`validate options should throw an error on the "scale" option with -1 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be = 1.
-   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
+ - options.scale should be > 0.
+   -> The fraction of the original size of the output image. If both this and \`width\` or \`height\` are set, \`width\` or \`height\` takes precedence."
 `;
 
 exports[`validate options should throw an error on the "scale" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be = 1.
-   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
-`;
-
-exports[`validate options should throw an error on the "scale" option with 1.1 value 1`] = `
-"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be = 1.
-   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
-`;
-
-exports[`validate options should throw an error on the "scale" option with 2 value 1`] = `
-"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be = 1.
-   -> The fraction of the original size of the output image. If both this and \`size\` are set, \`size\` takes precedence."
+ - options.scale should be > 0.
+   -> The fraction of the original size of the output image. If both this and \`width\` or \`height\` are set, \`width\` or \`height\` takes precedence."
 `;
 
 exports[`validate options should throw an error on the "scaleUp" option with 0 value 1`] = `
