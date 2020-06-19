@@ -69,13 +69,12 @@ export default function (
   const queryObject = this.resourceQuery
     ? (loaderUtils.parseQuery(this.resourceQuery) as Partial<OPTIONS>)
     : undefined;
-  const fullOptions = merge(queryObject ?? {}, options ?? {});
+  const fullOptions = merge(options ?? {}, queryObject ?? {});
 
-  if (fullOptions)
-    validateOptions(schema as JSONSchema7, fullOptions, {
-      name: "Image Resize Loader",
-      baseDataPath: "options",
-    });
+  validateOptions(schema as JSONSchema7, fullOptions, {
+    name: "Image Resize Loader",
+    baseDataPath: "options",
+  });
 
   const size = fullOptions.size;
   const scale = fullOptions.scale;
