@@ -62,19 +62,19 @@ import placeholderUrl from "./some_pic.png?{width:500}";
 
 ## Options
 
-| Name                                          | Type                                                         | Default                                       | Description                                                                                                                                |
-| --------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **[`width`](#width)**                         | `number`                                                     | `undefined`                                   | The width of the output image.                                                                                                             |
-| **[`height`](#height)**                       | `number`                                                     | `undefined`                                   | The height of the output image.                                                                                                            |
-| **[`scale`](#scale)**                         | `number`                                                     | `undefined`                                   | The fraction of the original size of the output image. If both this and `width` or `height` are set, `width` or `height` takes precedence. |
-| **[`scaleUp`](#scaleUp)**                     | `boolean`                                                    | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size.                                                  |
-| **[`fit`](#fit)**                             | `"cover"`, `"contain"`, `"fill"`, `"inside"`, or `"outside"` | `"cover"`                                     | How the image should be resized to fit both provided dimensions.                                                                           |
-| **[`position`](#position)**                   | See **[`position`](#position)**                              | `"centre"`                                    | Where the image is positioned.                                                                                                             |
-| **[`background`](#background)**               | `{string\|object}`                                           | `{r:0,g:0,b:0,alpha:1}`                       | The background color of the image.                                                                                                         |
-| **[`format`](#format)**                       | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"`                     | `undefined`                                   | The format of the output file.                                                                                                             |
-| **[`quality`](#quality)**                     | `number`                                                     | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                                                                           |
-| **[`sharpOptions`](#sharpOptions)**           | `object`                                                     | `undefined`                                   | Additional options for [sharp](https://sharp.pixelplumbing.com).                                                                           |
-| **[`fileLoaderOptions`](#fileLoaderOptions)** | `object`                                                     | `undefined`                                   | Additional options for [file-loader](https://github.com/webpack-contrib/file-loader).                                                      |
+| Name                                          | Type                                                         | Default                                       | Description                                                                                  |
+| --------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **[`width`](#width)**                         | `number`                                                     | `undefined`                                   | The width of the output image.                                                               |
+| **[`height`](#height)**                       | `number`                                                     | `undefined`                                   | The height of the output image.                                                              |
+| **[`scale`](#scale)**                         | `number`                                                     | `undefined`                                   | The fraction of the original size of the output image. `width` and `height` take precedence. |
+| **[`scaleUp`](#scaleUp)**                     | `boolean`                                                    | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size.    |
+| **[`fit`](#fit)**                             | `"cover"`, `"contain"`, `"fill"`, `"inside"`, or `"outside"` | `"cover"`                                     | How the image should be resized to fit both provided dimensions.                             |
+| **[`position`](#position)**                   | See **[`position`](#position)**                              | `"centre"`                                    | Where the image is positioned.                                                               |
+| **[`background`](#background)**               | `{string\|object}`                                           | `{r:0,g:0,b:0,alpha:1}`                       | The background color of the image.                                                           |
+| **[`format`](#format)**                       | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"`                     | `undefined`                                   | The format of the output file.                                                               |
+| **[`quality`](#quality)**                     | `number`                                                     | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                             |
+| **[`sharpOptions`](#sharpOptions)**           | `object`                                                     | `undefined`                                   | Additional options for [sharp](https://sharp.pixelplumbing.com).                             |
+| **[`fileLoaderOptions`](#fileLoaderOptions)** | `object`                                                     | `undefined`                                   | Additional options for [file-loader](https://github.com/webpack-contrib/file-loader).        |
 
 ### `width`
 
@@ -96,7 +96,7 @@ If both this and `width` or `height` are set, `width` or `height` takes preceden
 
 ### `scaleUp`
 
-When true, images will be scaled up to a larger size. When false, if the desired size, either the desired height is greater than the height of the original image, the desired width is greater than the width of the original image, or `scale` is greater than 1, the size of the output image will be the same as the imported image.
+When true, images will be scaled up to a larger size. When false, if the desired size, either the `height` is greater than the height of the original image, the `width` is greater than the width of the original image, or `scale` is greater than 1, the size of the output image will be the same as the imported image.
 
 ### `fit`
 
