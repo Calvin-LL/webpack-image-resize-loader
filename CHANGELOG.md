@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.4](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v2.0.2...v2.0.4) (2020-06-21)
+
+
+### Bug Fixes
+
+* scale not taking precedence and scaleUp not applying to scale ([29e97f2](https://github.com/CoolCyberBrain/webpack-image-resize-loader/commit/29e97f251f9e6c99449447515064a54c95efcb1c))
+
+### [2.0.3](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v2.0.2...v2.0.3) (2020-06-21)
+
+
+### Bug Fixes
+
+* scale not taking precedence and scaleUp not applying to scale ([29e97f2](https://github.com/CoolCyberBrain/webpack-image-resize-loader/commit/29e97f251f9e6c99449447515064a54c95efcb1c))
+
 ### [2.0.2](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v2.0.1...v2.0.2) (2020-06-19)
 
 ### [2.0.1](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v2.0.0...v2.0.1) (2020-06-19)
