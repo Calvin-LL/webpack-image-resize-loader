@@ -1,56 +1,297 @@
+import { toMatchImageSnapshot } from "jest-image-snapshot";
 import webpack from "webpack";
 
 import compile from "./helpers/compile";
-import execute from "./helpers/execute";
+import convertToPng from "./helpers/convertToPng";
 import getCompiler from "./helpers/getCompiler";
 import readAsset from "./helpers/readAsset";
 
+expect.extend({ toMatchImageSnapshot });
+
 describe('"scaleUp" option', () => {
-  it("should work with true when target width is small", async () => {
+  test("should work with true when target width is small", async () => {
     const compiler = getCompiler({
       width: 10,
       scaleUp: true,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
     });
     const stats = await compile(compiler);
 
     expect(
-      execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
-    ).toMatchSnapshot("result");
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "10w-80q",
+    });
   });
 
-  it("should work with false when target width is small", async () => {
+  test("should work with false when target width is small", async () => {
     const compiler = getCompiler({
       width: 10,
       scaleUp: false,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
     });
     const stats = await compile(compiler);
 
     expect(
-      execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
-    ).toMatchSnapshot("result");
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "10w-80q",
+    });
   });
 
-  it("should work with true when target width is large", async () => {
+  test("should work with true when target width is large", async () => {
     const compiler = getCompiler({
       width: 3000,
       scaleUp: true,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
     });
     const stats = await compile(compiler);
 
     expect(
-      execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
-    ).toMatchSnapshot("result");
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "3000w-80q",
+    });
   });
 
-  it("should work with false when target width is large", async () => {
+  test("should work with false when target width is large", async () => {
     const compiler = getCompiler({
       width: 3000,
       scaleUp: false,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
     });
     const stats = await compile(compiler);
 
     expect(
-      execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
-    ).toMatchSnapshot("result");
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "original-80q",
+    });
+  });
+
+  test("should work with true when target width is small and height is small", async () => {
+    const compiler = getCompiler({
+      width: 10,
+      height: 10,
+      scaleUp: true,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "10w-10h-80q",
+    });
+  });
+
+  test("should work with false when target width is small and height is small", async () => {
+    const compiler = getCompiler({
+      width: 10,
+      height: 10,
+      scaleUp: false,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "10w-10h-80q",
+    });
+  });
+
+  test("should work with true when target width is small and height is large", async () => {
+    const compiler = getCompiler({
+      width: 10,
+      height: 5000,
+      scaleUp: true,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "10w-5000h-80q",
+    });
+  });
+
+  test("should work with false when target width is small and height is large", async () => {
+    const compiler = getCompiler({
+      width: 10,
+      height: 5000,
+      scaleUp: false,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "original-80q",
+    });
+  });
+
+  test("should work with true when target width is large and height is small", async () => {
+    const compiler = getCompiler({
+      width: 5000,
+      height: 10,
+      scaleUp: true,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "5000w-10h-80q",
+    });
+  });
+
+  test("should work with false when target width is large and height is small", async () => {
+    const compiler = getCompiler({
+      width: 5000,
+      height: 10,
+      scaleUp: false,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "original-80q",
+    });
+  });
+
+  test("should work with true when target scale is <= 1", async () => {
+    const compiler = getCompiler({
+      scale: 0.5,
+      scaleUp: true,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "0.5x-80q",
+    });
+  });
+
+  test("should work with false when target scale is <= 1", async () => {
+    const compiler = getCompiler({
+      scale: 0.5,
+      scaleUp: false,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "0.5x-80q",
+    });
+  });
+
+  test("should work with true when target scale is > 1", async () => {
+    const compiler = getCompiler({
+      scale: 2,
+      scaleUp: true,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "2x-80q",
+    });
+  });
+
+  test("should work with false when target scale is > 1", async () => {
+    const compiler = getCompiler({
+      scale: 2,
+      scaleUp: false,
+      fileLoaderOptions: {
+        name: "image.jpg",
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(
+      await convertToPng(
+        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+      )
+    ).toMatchImageSnapshot({
+      customDiffConfig: { threshold: 0 },
+      customSnapshotIdentifier: "original-80q",
+    });
   });
 });

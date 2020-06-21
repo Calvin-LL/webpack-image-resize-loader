@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`"quality" option should work with 1: result 1`] = `"16760b859b0650f9e8aaa30ee4b847f8.jpg"`;
-
-exports[`"quality" option should work with 80: result 1`] = `"e9cac5dc1b3f4b537ff58229490ade0c.jpg"`;

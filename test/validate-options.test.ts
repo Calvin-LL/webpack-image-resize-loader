@@ -75,7 +75,7 @@ describe("validate options", () => {
     value: any,
     type: "success" | "failure"
   ) {
-    it(`should ${
+    test(`should ${
       type === "success" ? "successfully validate" : "throw an error on"
     } the "${key}" option with ${JSON.stringify(value)} value`, async () => {
       const compiler = getCompiler({
