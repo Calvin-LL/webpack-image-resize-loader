@@ -124,15 +124,11 @@ async function processImage(
   const normalizedResultHeight = height ?? 0;
   const normalizedResultWidth = width ?? 0;
 
-  if (scale) {
-    sharpImage = sharpImage.resize({
-      width: Math.round(normalizedImageWidth * scale),
-      ...sharpOptions?.resize,
-    });
-  } else if (
-    scaleUp ||
-    (normalizedResultHeight <= normalizedImageHeight &&
-      normalizedResultWidth <= normalizedImageWidth)
+  if (
+    (width || height) &&
+    (scaleUp ||
+      (normalizedResultHeight <= normalizedImageHeight &&
+        normalizedResultWidth <= normalizedImageWidth))
   )
     sharpImage = sharpImage.resize({
       width,
@@ -142,6 +138,15 @@ async function processImage(
       background,
       ...sharpOptions?.resize,
     });
+  else if (scale && (scaleUp || scale <= 1)) {
+    sharpImage = sharpImage.resize({
+      width: Math.round(normalizedImageWidth * scale),
+      fit,
+      position,
+      background,
+      ...sharpOptions?.resize,
+    });
+  }
 
   if (format)
     sharpImage = sharpImage[format]({ quality, ...sharpOptions?.[format] });
