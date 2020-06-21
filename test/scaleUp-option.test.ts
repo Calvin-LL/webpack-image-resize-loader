@@ -257,7 +257,7 @@ describe('"scaleUp" option', () => {
 
   test("should work with true when target scale is > 1", async () => {
     const compiler = getCompiler({
-      scale: 2,
+      scale: 1.2,
       scaleUp: true,
       fileLoaderOptions: {
         name: "image.jpg",
@@ -271,7 +271,7 @@ describe('"scaleUp" option', () => {
       )
     ).toMatchImageSnapshot({
       customDiffConfig: { threshold: 0 },
-      customSnapshotIdentifier: "2x-80q",
+      customSnapshotIdentifier: "1.2x-80q",
     });
   });
 
