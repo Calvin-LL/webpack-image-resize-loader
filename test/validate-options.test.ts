@@ -80,7 +80,7 @@ describe("validate options", () => {
     } the "${key}" option with ${JSON.stringify(value)} value`, async () => {
       const compiler = getCompiler({
         width: 10,
-        ...{ [key]: value },
+        [key]: value,
       });
 
       let stats;
