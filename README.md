@@ -1,6 +1,6 @@
 # webpack-image-resize-loader
 
-[![npm](https://img.shields.io/npm/v/webpack-image-resize-loader)](https://www.npmjs.com/package/webpack-image-resize-loader) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
+[![npm](https://img.shields.io/npm/v/webpack-image-resize-loader?style=flat)](https://www.npmjs.com/package/webpack-image-resize-loader) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://opensource.org/licenses/MIT)
 
 This loader resize the given images to the desired size.
 
@@ -11,7 +11,7 @@ Supports JPEG, PNG, WebP, and, TIFF images.
 Install with npm:
 
 ```bash
-npm install --save-dev webpack-image-resize-loader
+npm install webpack-image-resize-loader --save-dev
 ```
 
 Install with yarn:
@@ -23,6 +23,8 @@ yarn add webpack-image-resize-loader --dev
 ## Usage
 
 Note: if you only want to shrink some but not all images, check out [webpack-query-loader](https://github.com/CoolCyberBrain/webpack-query-loader) or use webpack's `resourceQuery`. If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/CoolCyberBrain/webpack-image-srcset-loader)
+
+#### webpack.config.js
 
 ```javascript
 module.exports = {
