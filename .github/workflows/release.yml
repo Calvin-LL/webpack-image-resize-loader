@@ -48,6 +48,10 @@ jobs:
       - run: npm ci
       - name: Build
         run: npm run build
+      - name: Publish on NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -59,7 +63,3 @@ jobs:
           body: See [CHANGELOG.md](https://github.com/CoolCyberBrain/webpack-image-resize-loader/blob/master/CHANGELOG.md)
           draft: false
           prerelease: false
-      - name: Publish on NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
