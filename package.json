@@ -47,7 +47,7 @@
     "sharp": "^0.25.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "^9.0.1",
+    "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.0.1",
     "@types/file-loader": "^4.2.0",
     "@types/jest": "^26.0.4",
