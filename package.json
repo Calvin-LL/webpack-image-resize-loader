@@ -50,7 +50,7 @@
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
     "@types/file-loader": "^4.2.0",
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^26.0.5",
     "@types/jest-image-snapshot": "^3.1.0",
     "@types/loader-utils": "^2.0.1",
     "@types/mime": "^2.0.2",
