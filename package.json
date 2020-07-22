@@ -56,7 +56,7 @@
     "@types/mime": "^2.0.2",
     "@types/node": "^14.0.20",
     "@types/replace-ext": "0.0.27",
-    "@types/sharp": "^0.25.0",
+    "@types/sharp": "^0.25.1",
     "@types/webpack": "^4.41.21",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "^3.2.0",
