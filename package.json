@@ -62,7 +62,7 @@
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "jest-image-snapshot": "^4.0.2",
+    "jest-image-snapshot": "^4.1.0",
     "memfs": "^3.2.0",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
