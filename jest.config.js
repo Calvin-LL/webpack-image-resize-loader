@@ -7,4 +7,5 @@ module.exports = {
   },
   testMatch: ["<rootDir>/test/**/*.test.ts"],
   testEnvironment: "node",
+  testTimeout: 10000,
 };
