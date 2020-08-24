@@ -58,7 +58,7 @@
     "@types/replace-ext": "0.0.27",
     "@types/sharp": "^0.25.1",
     "@types/webpack": "^4.41.21",
-    "commitizen": "^4.1.2",
+    "commitizen": "^4.1.5",
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",
     "jest": "^26.4.0",
