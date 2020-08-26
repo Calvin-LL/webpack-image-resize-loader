@@ -44,7 +44,7 @@
     "mime": "^2.4.6",
     "replace-ext": "^2.0.0",
     "schema-utils": "^2.7.0",
-    "sharp": "^0.25.3"
+    "sharp": "^0.26.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
