@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v2.0.6...v3.0.0) (2020-09-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** Update to [sharp@0.26](https://sharp.pixelplumbing.com/changelog#v026---zoom)
+
+* **deps:** update packages ([40abb83](https://github.com/CoolCyberBrain/webpack-image-resize-loader/commit/40abb83caf12c9bf62ec62d49849659c125bc782))
+
 ### [2.0.6](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v2.0.5...v2.0.6) (2020-06-24)
 
 ### [2.0.5](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v2.0.4...v2.0.5) (2020-06-23)
