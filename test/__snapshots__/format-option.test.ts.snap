@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`"format" option should work with png: result 1`] = `"6199cbefbf619abc909266f78352da1d.png"`;
+exports[`"format" option should work with png: result 1`] = `"3a2d2a9cc0565a79c59c8195e75e31b3.png"`;
 
-exports[`"format" option should work with tiff: result 1`] = `"fd1e1edb6b7d9cb140d2b521aa60035f.tiff"`;
+exports[`"format" option should work with tiff: result 1`] = `"d926d8074986dbe0abeda91492586c1e.tiff"`;
 
-exports[`"format" option should work with webp: result 1`] = `"1fd44d17eabb4e5e4cb666a23c08fe4f.webp"`;
+exports[`"format" option should work with webp: result 1`] = `"378da26a9b7b9f1a740fbe95268d30ce.webp"`;
