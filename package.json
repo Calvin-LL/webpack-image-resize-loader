@@ -54,7 +54,7 @@
     "@types/jest-image-snapshot": "^4.1.0",
     "@types/loader-utils": "^2.0.1",
     "@types/mime": "^2.0.3",
-    "@types/node": "^14.10.2",
+    "@types/node": "^14.10.3",
     "@types/replace-ext": "0.0.27",
     "@types/sharp": "^0.26.0",
     "@types/webpack": "^4.41.22",
