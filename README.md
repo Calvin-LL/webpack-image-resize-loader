@@ -59,7 +59,7 @@ import placeholderUrl from "./some_pic.png?quality=100";
 or
 
 ```javascript
-import placeholderUrl from "./some_pic.png?{width:500}";
+import placeholderUrl from './some_pic.png?{"width":500}';
 ```
 
 ## Options

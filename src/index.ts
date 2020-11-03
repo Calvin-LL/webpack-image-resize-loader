@@ -4,8 +4,8 @@ import fileLoader from "file-loader";
 import loaderUtils from "loader-utils";
 import mime from "mime";
 import replaceExt from "replace-ext";
-import validateOptions from "schema-utils";
-import { JSONSchema7 } from "schema-utils/declarations/validate";
+import { validate } from "schema-utils";
+import { Schema } from "schema-utils/declarations/validate";
 import sharp from "sharp";
 import { RawSourceMap } from "source-map";
 import { loader } from "webpack";
@@ -66,7 +66,7 @@ export default function (
     : undefined;
   const fullOptions = { ...options, ...queryObject };
 
-  validateOptions(schema as JSONSchema7, fullOptions, {
+  validate(schema as Schema, fullOptions, {
     name: "Image Resize Loader",
     baseDataPath: "options",
   });
