@@ -8,15 +8,15 @@ import readAsset from "./helpers/readAsset";
 
 expect.extend({ toMatchImageSnapshot });
 
-describe('"height" option', () => {
+describe.each([4, 5] as const)('v%d "height" option', (webpackVersion) => {
   test("should work with 10", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       height: 14,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -29,13 +29,13 @@ describe('"height" option', () => {
   });
 
   test("should work with 10000000", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       height: 10000000,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(

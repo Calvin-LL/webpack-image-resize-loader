@@ -3,7 +3,7 @@ import webpack from "webpack";
 import compile from "./helpers/compile";
 import getCompiler from "./helpers/getCompiler";
 
-describe("validate options", () => {
+describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
   const tests = {
     width: {
       success: [10],
@@ -78,7 +78,7 @@ describe("validate options", () => {
     test(`should ${
       type === "success" ? "successfully validate" : "throw an error on"
     } the "${key}" option with ${JSON.stringify(value)} value`, async () => {
-      const compiler = getCompiler({
+      const compiler = getCompiler(webpackVersion, {
         width: 10,
         [key]: value,
       });
@@ -86,7 +86,7 @@ describe("validate options", () => {
       let stats;
 
       try {
-        stats = await compile(compiler);
+        stats = await compile(webpackVersion, compiler);
       } finally {
         if (type === "success") {
           expect((stats as webpack.Stats).hasErrors()).toBe(false);

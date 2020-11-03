@@ -8,9 +8,9 @@ import readAsset from "./helpers/readAsset";
 
 expect.extend({ toMatchImageSnapshot });
 
-describe('"background" option', () => {
+describe.each([4, 5] as const)('v%d "background" option', (webpackVersion) => {
   test("should work with red", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 10,
       fit: "contain",
@@ -19,7 +19,7 @@ describe('"background" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(

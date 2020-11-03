@@ -9,16 +9,16 @@ import readAsset from "./helpers/readAsset";
 
 expect.extend({ toMatchImageSnapshot });
 
-describe('"format" option', () => {
+describe.each([4, 5] as const)('v%d "format" option', (webpackVersion) => {
   test("should work with jpeg", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       format: "jpeg",
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -31,11 +31,11 @@ describe('"format" option', () => {
   });
 
   test("should work with png", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       format: "png",
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
@@ -43,11 +43,11 @@ describe('"format" option', () => {
   });
 
   test("should work with webp", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       format: "webp",
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))
@@ -55,11 +55,11 @@ describe('"format" option', () => {
   });
 
   test("should work with tiff", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       format: "tiff",
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       execute(readAsset("main.bundle.js", compiler, stats as webpack.Stats))

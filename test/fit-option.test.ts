@@ -8,9 +8,9 @@ import readAsset from "./helpers/readAsset";
 
 expect.extend({ toMatchImageSnapshot });
 
-describe('"fit" option', () => {
+describe.each([4, 5] as const)('v%d "fit" option', (webpackVersion) => {
   test("should work with cover", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 10,
       fit: "cover",
@@ -18,7 +18,7 @@ describe('"fit" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -31,7 +31,7 @@ describe('"fit" option', () => {
   });
 
   test("should work with contain", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 10,
       fit: "contain",
@@ -39,7 +39,7 @@ describe('"fit" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -52,7 +52,7 @@ describe('"fit" option', () => {
   });
 
   test("should work with fill", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 10,
       fit: "fill",
@@ -60,7 +60,7 @@ describe('"fit" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(

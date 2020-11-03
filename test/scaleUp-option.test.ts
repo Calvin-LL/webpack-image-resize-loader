@@ -8,16 +8,16 @@ import readAsset from "./helpers/readAsset";
 
 expect.extend({ toMatchImageSnapshot });
 
-describe('"scaleUp" option', () => {
+describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
   test("should work with true when target width is small", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       scaleUp: true,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -30,14 +30,14 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with false when target width is small", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       scaleUp: false,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -50,14 +50,14 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with true when target width is large", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 3000,
       scaleUp: true,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -70,14 +70,14 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with false when target width is large", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 3000,
       scaleUp: false,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -90,7 +90,7 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with true when target width is small and height is small", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 10,
       scaleUp: true,
@@ -98,7 +98,7 @@ describe('"scaleUp" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -111,7 +111,7 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with false when target width is small and height is small", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 10,
       scaleUp: false,
@@ -119,7 +119,7 @@ describe('"scaleUp" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -132,7 +132,7 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with true when target width is small and height is large", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 5000,
       scaleUp: true,
@@ -140,7 +140,7 @@ describe('"scaleUp" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -153,7 +153,7 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with false when target width is small and height is large", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 10,
       height: 5000,
       scaleUp: false,
@@ -161,7 +161,7 @@ describe('"scaleUp" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -174,7 +174,7 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with true when target width is large and height is small", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 5000,
       height: 10,
       scaleUp: true,
@@ -182,7 +182,7 @@ describe('"scaleUp" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -195,7 +195,7 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with false when target width is large and height is small", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       width: 5000,
       height: 10,
       scaleUp: false,
@@ -203,7 +203,7 @@ describe('"scaleUp" option', () => {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -216,14 +216,14 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with true when target scale is <= 1", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       scale: 0.5,
       scaleUp: true,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -236,14 +236,14 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with false when target scale is <= 1", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       scale: 0.5,
       scaleUp: false,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -256,14 +256,14 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with true when target scale is > 1", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       scale: 1.2,
       scaleUp: true,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
@@ -276,14 +276,14 @@ describe('"scaleUp" option', () => {
   });
 
   test("should work with false when target scale is > 1", async () => {
-    const compiler = getCompiler({
+    const compiler = getCompiler(webpackVersion, {
       scale: 2,
       scaleUp: false,
       fileLoaderOptions: {
         name: "image.jpg",
       },
     });
-    const stats = await compile(compiler);
+    const stats = await compile(webpackVersion, compiler);
 
     expect(
       await convertToPng(
