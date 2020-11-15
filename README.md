@@ -70,6 +70,7 @@ import placeholderUrl from './some_pic.png?{"width":500}';
 | **[`height`](#height)**                       | `number`                                                     | `undefined`                                   | The height of the output image.                                                              |
 | **[`scale`](#scale)**                         | `number`                                                     | `undefined`                                   | The fraction of the original size of the output image. `width` and `height` take precedence. |
 | **[`scaleUp`](#scaleup)**                     | `boolean`                                                    | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size.    |
+| **[`preserveRotation`](#preserveRotation)**   | `boolean`                                                    | `false`                                       | Whether or not to preserve EXIF rotation in the source image (by rotating the image before resizing). |
 | **[`fit`](#fit)**                             | `"cover"`, `"contain"`, `"fill"`, `"inside"`, or `"outside"` | `"cover"`                                     | How the image should be resized to fit both provided dimensions.                             |
 | **[`position`](#position)**                   | See **[`position`](#position)**                              | `"centre"`                                    | Where the image is positioned.                                                               |
 | **[`background`](#background)**               | `string\|object`                                             | `{r:0,g:0,b:0,alpha:1}`                       | The background color of the image.                                                           |
@@ -99,6 +100,10 @@ If both this and `width` or `height` are set, `width` or `height` takes preceden
 ### `scaleUp`
 
 When true, images will be scaled up to a larger size. When false, if the desired size, either the `height` is greater than the height of the original image, the `width` is greater than the width of the original image, or `scale` is greater than 1, the size of the output image will be the same as the imported image.
+
+### `preserveRotation`
+
+When true, images will first be rotated according to the orientation listed in their EXIF data.  If an image has no EXIF data, this option has no effect on that image.  The default behavior (if this option is false or unspecified) is to discard the EXIF orientation.
 
 ### `fit`
 

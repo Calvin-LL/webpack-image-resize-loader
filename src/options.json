@@ -22,6 +22,10 @@
       "description": "Whether or not to scale up the image when the desired size is larger than the image size. Default to false.",
       "type": "boolean"
     },
+    "preserveRotation": {
+      "description": "Whether or not to preserve EXIF rotation in the source image (by rotating the image before resizing).  Default to false.",
+      "type": "boolean"
+    },
     "position": {
       "enum": [
         "top",

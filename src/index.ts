@@ -42,6 +42,7 @@ export interface OPTIONS {
   format?: "jpeg" | "png" | "webp" | "tiff";
   quality?: number;
   scaleUp?: boolean;
+  preserveRotation?: boolean;
   sharpOptions?: {
     resize?: object;
     png?: object;
@@ -111,10 +112,15 @@ async function processImage(
     format,
     quality,
     scaleUp,
+    preserveRotation,
     sharpOptions,
   }: Readonly<OPTIONS>
 ) {
   let sharpImage = sharp(Buffer.from(content));
+
+  if(preserveRotation)
+    sharpImage = sharpImage.rotate();
+
   const {
     height: imageHeight,
     width: imageWidth,
