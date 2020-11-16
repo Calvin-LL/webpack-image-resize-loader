@@ -5,5 +5,8 @@ updates:
     schedule:
       interval: daily
       time: "13:00"
+    ignore:
+      - dependency-name: "webpack"
+        versions: ["5.x"]
     open-pull-requests-limit: 10
     versioning-strategy: increase
