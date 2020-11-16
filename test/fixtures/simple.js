@@ -1,4 +1,4 @@
-import jpg from "./Macaca_nigra_self-portrait_large.jpg?test";
+import jpg from "./Macaca_nigra_self-portrait_large.jpg";
 
 __export__ = jpg;
 
