@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.3](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v3.0.2...v3.0.3) (2020-11-16)
+
+
+### Bug Fixes
+
+* import with query where the value is a number not working ([2efa94d](https://github.com/CoolCyberBrain/webpack-image-resize-loader/commit/2efa94dcdaf82b472ad409c4609fea5629f3deeb))
+
 ### [3.0.2](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v3.0.1...v3.0.2) (2020-11-03)
 
 ### [3.0.1](https://github.com/CoolCyberBrain/webpack-image-resize-loader/compare/v3.0.0...v3.0.1) (2020-10-28)
