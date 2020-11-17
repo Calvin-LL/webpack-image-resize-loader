@@ -30,9 +30,9 @@
     "email": "npm@calvin.sh",
     "url": "https://calvin.sh"
   },
-  "repository": "CoolCyberBrain/webpack-image-resize-loader",
-  "bugs": "https://github.com/CoolCyberBrain/webpack-image-resize-loader/issues",
-  "homepage": "https://github.com/CoolCyberBrain/webpack-image-resize-loader",
+  "repository": "Calvin-LL/webpack-image-resize-loader",
+  "bugs": "https://github.com/Calvin-LL/webpack-image-resize-loader/issues",
+  "homepage": "https://github.com/Calvin-LL/webpack-image-resize-loader",
   "license": "MIT",
   "engines": {
     "node": ">= 10.13.0"
