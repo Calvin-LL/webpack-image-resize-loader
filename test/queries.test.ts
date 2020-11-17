@@ -9,7 +9,7 @@ import readAsset from "./helpers/readAsset";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)("v%d queries", (webpackVersion) => {
-  test("should be overridden by json query", async () => {
+  test('should be overridden by json query `{"width": 10}`', async () => {
     const compiler = getCompiler(
       webpackVersion,
       {
@@ -18,7 +18,8 @@ describe.each([4, 5] as const)("v%d queries", (webpackVersion) => {
           name: "image.jpg",
         },
       },
-      "json-query.js"
+      "index.js",
+      `require('./Macaca_nigra_self-portrait_large.jpg?{"width": 10}')`
     );
     const stats = await compile(webpackVersion, compiler);
 
@@ -32,7 +33,7 @@ describe.each([4, 5] as const)("v%d queries", (webpackVersion) => {
     });
   });
 
-  test("should be overridden by query", async () => {
+  test("should be overridden by query scale=1.2&scaleUp=true", async () => {
     const compiler = getCompiler(
       webpackVersion,
       {
@@ -41,17 +42,48 @@ describe.each([4, 5] as const)("v%d queries", (webpackVersion) => {
           name: "image.jpg",
         },
       },
-      "regular-query.js"
+      "index.js",
+      'require("./Macaca_nigra_self-portrait_large.jpg?scale=1.2&scaleUp=true")'
     );
     const stats = await compile(webpackVersion, compiler);
+    try {
+      expect(
+        await convertToPng(
+          readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+        )
+      ).toMatchImageSnapshot({
+        customDiffConfig: { threshold: 0 },
+        customSnapshotIdentifier: "1.2x-80q",
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  });
 
-    expect(
-      await convertToPng(
-        readAsset("image.jpg", compiler, stats as webpack.Stats, true)
-      )
-    ).toMatchImageSnapshot({
-      customDiffConfig: { threshold: 0 },
-      customSnapshotIdentifier: "1.2x-80q",
-    });
+  test("should be overridden by query scale=1.2&scaleUp=true", async () => {
+    const compiler = getCompiler(
+      webpackVersion,
+      {
+        scale: 1,
+        fileLoaderOptions: {
+          name: "image.jpg",
+        },
+      },
+      "index.js",
+      'require("./Macaca_nigra_self-portrait_large.jpg?scale=1.2&scaleUp=true")'
+    );
+    const stats = await compile(webpackVersion, compiler);
+    try {
+      expect(
+        await convertToPng(
+          readAsset("image.jpg", compiler, stats as webpack.Stats, true)
+        )
+      ).toMatchImageSnapshot({
+        customDiffConfig: { threshold: 0 },
+        customSnapshotIdentifier: "1.2x-80q",
+      });
+    } catch (e) {
+      console.log(e);
+    }
   });
 });

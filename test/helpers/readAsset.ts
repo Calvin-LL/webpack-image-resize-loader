@@ -11,7 +11,6 @@ export default (
 ) => {
   const usedFs = (compiler.outputFileSystem as unknown) as typeof fs;
   const outputPath = stats.compilation.outputOptions.path;
-
   try {
     if (readAsBuffer) {
       return usedFs.readFileSync(path.join(outputPath, asset));
