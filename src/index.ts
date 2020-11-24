@@ -36,19 +36,19 @@ export interface OPTIONS {
     | "centre"
     | "entropy"
     | "attention";
-  background?: string | any;
+  background?: string | Record<string, unknown>;
   scale?: number;
   format?: "jpeg" | "png" | "webp" | "tiff";
   quality?: number;
   scaleUp?: boolean;
   sharpOptions?: {
-    resize?: any;
-    png?: any;
-    jpeg?: any;
-    webp?: any;
-    tiff?: any;
+    resize?: Record<string, unknown>;
+    png?: Record<string, unknown>;
+    jpeg?: Record<string, unknown>;
+    webp?: Record<string, unknown>;
+    tiff?: Record<string, unknown>;
   };
-  fileLoaderOptions?: any;
+  fileLoaderOptions?: Record<string, unknown>;
 }
 
 export const raw = true;
@@ -182,8 +182,10 @@ function getFormat(resourcePath: string): OPTIONS["format"] | undefined {
   }
 }
 
-function attemptToConvertValuesToNumbers(object: any | undefined): any {
-  const result = { ...object };
+function attemptToConvertValuesToNumbers(
+  object: Record<string, unknown> | undefined
+): Record<string, unknown> {
+  const result: Record<string, unknown> = { ...object };
 
   Object.keys(result).forEach((key) => {
     if (isNumeric(result[key])) {
@@ -195,7 +197,7 @@ function attemptToConvertValuesToNumbers(object: any | undefined): any {
 }
 
 // https://stackoverflow.com/a/175787
-function isNumeric(string: string): boolean {
+function isNumeric(string: any): boolean {
   if (typeof string !== "string") return false;
   // @ts-expect-error using isNaN to test string, works but typescript doesn't like
   return !isNaN(string) && !isNaN(parseFloat(string));
