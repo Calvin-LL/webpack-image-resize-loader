@@ -1,4 +1,5 @@
 import { toMatchImageSnapshot } from "jest-image-snapshot";
+
 import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 
 expect.extend({ toMatchImageSnapshot });
