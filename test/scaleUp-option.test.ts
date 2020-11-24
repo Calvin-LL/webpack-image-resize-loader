@@ -5,7 +5,7 @@ import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
-  test("should work with true when target width is small", async () => {
+  it("should work with true when target width is small", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -23,7 +23,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with false when target width is small", async () => {
+  it("should work with false when target width is small", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -41,7 +41,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with true when target width is large", async () => {
+  it("should work with true when target width is large", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -59,7 +59,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with false when target width is large", async () => {
+  it("should work with false when target width is large", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -77,7 +77,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with true when target width is small and height is small", async () => {
+  it("should work with true when target width is small and height is small", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -96,7 +96,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with false when target width is small and height is small", async () => {
+  it("should work with false when target width is small and height is small", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -115,7 +115,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with true when target width is small and height is large", async () => {
+  it("should work with true when target width is small and height is large", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -134,7 +134,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with false when target width is small and height is large", async () => {
+  it("should work with false when target width is small and height is large", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -153,7 +153,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with true when target width is large and height is small", async () => {
+  it("should work with true when target width is large and height is small", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -172,7 +172,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with false when target width is large and height is small", async () => {
+  it("should work with false when target width is large and height is small", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -191,7 +191,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with true when target scale is <= 1", async () => {
+  it("should work with true when target scale is <= 1", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -209,7 +209,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with false when target scale is <= 1", async () => {
+  it("should work with false when target scale is <= 1", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -227,7 +227,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with true when target scale is > 1", async () => {
+  it("should work with true when target scale is > 1", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -245,7 +245,7 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
     });
   });
 
-  test("should work with false when target scale is > 1", async () => {
+  it("should work with false when target scale is > 1", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {

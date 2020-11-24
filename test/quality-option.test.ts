@@ -5,7 +5,7 @@ import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)('v%d "quality" option', (webpackVersion) => {
-  test("should work with 80", async () => {
+  it("should work with 80", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -22,7 +22,7 @@ describe.each([4, 5] as const)('v%d "quality" option', (webpackVersion) => {
     });
   });
 
-  test("should work with 80", async () => {
+  it("should work with 80", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -40,7 +40,7 @@ describe.each([4, 5] as const)('v%d "quality" option', (webpackVersion) => {
     });
   });
 
-  test("should work with 1", async () => {
+  it("should work with 1", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {

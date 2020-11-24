@@ -5,7 +5,7 @@ import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)('v%d "background" option', (webpackVersion) => {
-  test("should work with red", async () => {
+  it("should work with red", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {

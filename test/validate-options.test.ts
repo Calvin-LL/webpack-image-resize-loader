@@ -74,7 +74,7 @@ describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
     value: any,
     type: "success" | "failure"
   ): void {
-    test(`should ${
+    it(`should ${
       type === "success" ? "successfully validate" : "throw an error on"
     } the "${key}" option with ${JSON.stringify(value)} value`, async () => {
       const compiler = new WIRLWebpackTestCompiler({ webpackVersion });

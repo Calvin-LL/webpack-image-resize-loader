@@ -5,7 +5,7 @@ import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)('v%d "height" option', (webpackVersion) => {
-  test("should work with 10", async () => {
+  it("should work with 10", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -22,7 +22,7 @@ describe.each([4, 5] as const)('v%d "height" option', (webpackVersion) => {
     });
   });
 
-  test("should work with 10000000", async () => {
+  it("should work with 10000000", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {

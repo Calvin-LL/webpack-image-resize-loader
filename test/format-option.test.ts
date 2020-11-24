@@ -5,7 +5,7 @@ import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)('v%d "format" option', (webpackVersion) => {
-  test("should work with jpeg", async () => {
+  it("should work with jpeg", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -23,7 +23,7 @@ describe.each([4, 5] as const)('v%d "format" option', (webpackVersion) => {
     });
   });
 
-  test("should work with png", async () => {
+  it("should work with png", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -35,7 +35,7 @@ describe.each([4, 5] as const)('v%d "format" option', (webpackVersion) => {
     expect(bundle.execute("main.js")).toMatchSnapshot("result");
   });
 
-  test("should work with webp", async () => {
+  it("should work with webp", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -47,7 +47,7 @@ describe.each([4, 5] as const)('v%d "format" option', (webpackVersion) => {
     expect(bundle.execute("main.js")).toMatchSnapshot("result");
   });
 
-  test("should work with tiff", async () => {
+  it("should work with tiff", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {

@@ -5,7 +5,7 @@ import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)('v%d "fit" option', (webpackVersion) => {
-  test("should work with cover", async () => {
+  it("should work with cover", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -24,7 +24,7 @@ describe.each([4, 5] as const)('v%d "fit" option', (webpackVersion) => {
     });
   });
 
-  test("should work with contain", async () => {
+  it("should work with contain", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -43,7 +43,7 @@ describe.each([4, 5] as const)('v%d "fit" option', (webpackVersion) => {
     });
   });
 
-  test("should work with fill", async () => {
+  it("should work with fill", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {

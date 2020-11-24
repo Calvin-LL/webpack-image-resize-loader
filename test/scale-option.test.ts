@@ -5,7 +5,7 @@ import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
 expect.extend({ toMatchImageSnapshot });
 
 describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
-  test("should work with 1", async () => {
+  it("should work with 1", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -22,7 +22,7 @@ describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
     });
   });
 
-  test("should work with 0.5", async () => {
+  it("should work with 0.5", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -39,7 +39,7 @@ describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
     });
   });
 
-  test("width should take precedence", async () => {
+  it("width should take precedence", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
@@ -57,7 +57,7 @@ describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
     });
   });
 
-  test("height should take precedence", async () => {
+  it("height should take precedence", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {
