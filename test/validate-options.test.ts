@@ -3,6 +3,8 @@ import webpack from "webpack";
 import compile from "./helpers/compile";
 import getCompiler from "./helpers/getCompiler";
 
+import WIRLWebpackTestCompiler from "./helpers/WIRLWebpackTestCompiler";
+
 describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
   const tests = {
     width: {
@@ -78,15 +80,20 @@ describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
     test(`should ${
       type === "success" ? "successfully validate" : "throw an error on"
     } the "${key}" option with ${JSON.stringify(value)} value`, async () => {
-      const compiler = getCompiler(webpackVersion, {
-        width: 10,
-        [key]: value,
-      });
+      const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
 
       let stats;
 
       try {
-        stats = await compile(webpackVersion, compiler);
+        stats = (
+          await compiler.compile({
+            loaderOptions: {
+              width: 10,
+              [key]: value,
+            },
+            throwOnError: false,
+          })
+        ).stats;
       } finally {
         if (type === "success") {
           expect((stats as webpack.Stats).hasErrors()).toBe(false);
