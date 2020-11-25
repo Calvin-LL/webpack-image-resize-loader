@@ -61,7 +61,7 @@ export default function (
   content: ArrayBuffer,
   sourceMap?: RawSourceMap
 ): void {
-  const callback = this.async();
+  const callback = this.async() as loader.loaderCallback;
   const defaultOptions: FullOptions = {
     format: getFormat(this.resourcePath),
     scaleUp: false,
@@ -88,7 +88,7 @@ export default function (
         result,
         sourceMap
       );
-      callback?.(null, fileLoaderResult);
+      callback(null, fileLoaderResult);
     })
     .catch((e) => {
       throw e;
