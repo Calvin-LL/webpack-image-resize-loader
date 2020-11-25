@@ -22,8 +22,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-
       - run: npm ci
-      - name: Build
-        run: npm run build
       - name: Run tests
         uses: nick-invision/retry@v1
         with:
