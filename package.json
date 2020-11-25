@@ -17,8 +17,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts .",
-    "test": "tsc && jest",
-    "test-no-build": "jest",
+    "lint:fix": "eslint --fix --ext .ts .",
+    "test": "tsc --project tsconfig.test-build.json && jest",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version"
   },
   "config": {
