@@ -1,5 +1,4 @@
 import fileLoader from "file-loader";
-import loaderUtils from "loader-utils";
 import mime from "mime";
 import path from "path";
 import replaceExt from "replace-ext";
@@ -9,13 +8,15 @@ import sharp from "sharp";
 import { RawSourceMap } from "source-map";
 import { loader } from "webpack";
 
+import { getOptions } from "@calvin-l/webpack-loader-util";
+
 import schema from "./options.json";
 
-export interface OPTIONS {
-  width?: number;
-  height?: number;
-  fit?: "cover" | "contain" | "fill" | "inside" | "outside";
-  position?:
+export interface Options {
+  readonly width?: number;
+  readonly height?: number;
+  readonly fit?: "cover" | "contain" | "fill" | "inside" | "outside";
+  readonly position?:
     | "top"
     | "right top"
     | "right"
@@ -36,20 +37,22 @@ export interface OPTIONS {
     | "centre"
     | "entropy"
     | "attention";
-  background?: string | Record<string, unknown>;
-  scale?: number;
-  format?: "jpeg" | "png" | "webp" | "tiff";
-  quality?: number;
-  scaleUp?: boolean;
-  sharpOptions?: {
-    resize?: Record<string, unknown>;
-    png?: Record<string, unknown>;
-    jpeg?: Record<string, unknown>;
-    webp?: Record<string, unknown>;
-    tiff?: Record<string, unknown>;
+  readonly background?: sharp.Color;
+  readonly scale?: number;
+  readonly format?: "jpeg" | "png" | "webp" | "tiff";
+  readonly quality?: number;
+  readonly scaleUp?: boolean;
+  readonly sharpOptions?: {
+    readonly resize?: Partial<sharp.ResizeOptions>;
+    readonly png?: Partial<sharp.PngOptions>;
+    readonly jpeg?: Partial<sharp.JpegOptions>;
+    readonly webp?: Partial<sharp.WebpOptions>;
+    readonly tiff?: Partial<sharp.TiffOptions>;
   };
-  fileLoaderOptions?: Record<string, unknown>;
+  readonly fileLoaderOptions?: Partial<fileLoader.Options>;
 }
+
+export type FullOptions = Options & Required<Pick<Options, "scaleUp">>;
 
 export const raw = true;
 
@@ -59,35 +62,26 @@ export default function (
   sourceMap?: RawSourceMap
 ): void {
   const callback = this.async();
-  const options = loaderUtils.getOptions(this) as Readonly<OPTIONS> | null;
-  const queryObject = this.resourceQuery
-    ? (loaderUtils.parseQuery(this.resourceQuery) as Partial<OPTIONS>)
-    : undefined;
-  const fullOptions = {
-    ...options,
-    ...attemptToConvertValuesToNumbers(queryObject),
+  const defaultOptions: FullOptions = {
+    format: getFormat(this.resourcePath),
+    scaleUp: false,
+  };
+  const options: Options = {
+    ...defaultOptions,
+    ...getOptions<Options>(this, true, true),
   };
 
-  validate(schema as Schema, fullOptions, {
+  validate(schema as Schema, options, {
     name: "Image Resize Loader",
     baseDataPath: "options",
   });
 
-  const fullOptionsWithDefaults = {
-    format: getFormat(this.resourcePath),
-    scaleUp: false,
-    ...fullOptions,
-  };
-
-  processImage(content, fullOptionsWithDefaults)
+  processImage(content, options)
     .then((result) => {
       const fileLoaderContext = {
         ...this,
-        resourcePath: replaceExtension(
-          this.resourcePath,
-          fullOptionsWithDefaults.format
-        ),
-        query: fullOptionsWithDefaults.fileLoaderOptions,
+        resourcePath: replaceExtension(this.resourcePath, options.format),
+        query: options.fileLoaderOptions,
       };
       const fileLoaderResult = fileLoader.call(
         fileLoaderContext,
@@ -114,7 +108,7 @@ async function processImage(
     quality,
     scaleUp,
     sharpOptions,
-  }: Readonly<OPTIONS>
+  }: Options
 ): Promise<Buffer> {
   let sharpImage = sharp(Buffer.from(content));
   const {
@@ -167,7 +161,7 @@ function replaceExtension(
   return replaceExt(resourcePath, `.${format}`);
 }
 
-function getFormat(resourcePath: string): OPTIONS["format"] | undefined {
+function getFormat(resourcePath: string): Options["format"] {
   const type = mime.getType(resourcePath);
 
   switch (type) {
@@ -180,25 +174,4 @@ function getFormat(resourcePath: string): OPTIONS["format"] | undefined {
     case "image/tiff":
       return "tiff";
   }
-}
-
-function attemptToConvertValuesToNumbers(
-  object: Record<string, unknown> | undefined
-): Record<string, unknown> {
-  const result: Record<string, unknown> = { ...object };
-
-  Object.keys(result).forEach((key) => {
-    if (isNumeric(result[key])) {
-      result[key] = Number(result[key]);
-    }
-  });
-
-  return result;
-}
-
-// https://stackoverflow.com/a/175787
-function isNumeric(string: any): boolean {
-  if (typeof string !== "string") return false;
-  // @ts-expect-error using isNaN to test string, works but typescript doesn't like
-  return !isNaN(string) && !isNaN(parseFloat(string));
 }
