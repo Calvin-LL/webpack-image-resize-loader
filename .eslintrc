@@ -6,7 +6,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers"],
   "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  "ignorePatterns": ["dist/", "lib/", "build/", "admin-actions/"],
+  "ignorePatterns": ["dist/", "test-dist/"],
   "rules": {
     "no-undef": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
