@@ -6,6 +6,12 @@ This loader resize the given images to the desired size.
 
 Supports JPEG, PNG, WebP, and, TIFF images.
 
+## Examples
+
+[React](https://github.com/Calvin-LL/webpack-image-resize-loader/tree/master/examples/react)
+
+[Vue](https://github.com/Calvin-LL/webpack-image-resize-loader/tree/master/examples/vue)
+
 ## Install
 
 Install with npm:
@@ -22,7 +28,7 @@ yarn add webpack-image-resize-loader --dev
 
 ## Usage
 
-Note: if you only want to shrink some but not all images, check out [webpack-query-loader](https://github.com/Calvin-LL/webpack-query-loader) or use webpack's `resourceQuery`. If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/Calvin-LL/webpack-image-srcset-loader)
+Note: if you only want to shrink some but not all images, check out [webpack-query-loader](https://github.com/Calvin-LL/webpack-query-loader) or use webpack's `resourceQuery` (like the examples in [webpack-image-placeholder-loader](https://github.com/Calvin-LL/webpack-image-placeholder-loader)). If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/Calvin-LL/webpack-image-srcset-loader)
 
 #### webpack.config.js
 
@@ -32,7 +38,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpe?g|webp|tiff?)/i,
+        test: /\.(png|jpe?g|webp|tiff?)$/i,
         use: [
           {
             loader: "webpack-image-resize-loader",
