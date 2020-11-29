@@ -18,6 +18,7 @@
     "build": "tsc",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --fix --ext .ts .",
+    "lint:markdown": "remark .",
     "test": "tsc --project tsconfig.test-build.json && jest",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version"
   },
@@ -72,6 +73,10 @@
     "jest-image-snapshot": "^4.2.0",
     "lint-staged": "^10.5.2",
     "prettier": "^2.2.1",
+    "remark-cli": "^9.0.0",
+    "remark-lint": "^8.0.0",
+    "remark-lint-no-dead-urls": "^1.1.0",
+    "remark-preset-lint-recommended": "^5.0.0",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2",

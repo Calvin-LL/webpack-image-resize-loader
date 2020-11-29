@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "remark-preset-lint-recommended",
+    "remark-lint-no-dead-urls",
+    [
+      "remark-lint-list-item-indent",
+      false
+    ]
+  ]
+}
