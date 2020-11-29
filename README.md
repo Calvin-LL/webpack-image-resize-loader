@@ -17,35 +17,35 @@ Supports JPEG, PNG, WebP, and, TIFF images.
 Install with npm:
 
 ```bash
-npm install webpack-image-resize-loader --save-dev
+npm install --save-dev webpack-image-resize-loader
 ```
 
 Install with yarn:
 
 ```bash
-yarn add webpack-image-resize-loader --dev
+yarn add --dev webpack-image-resize-loader
 ```
 
 ## Usage
 
-Note: if you only want to shrink some but not all images, check out [webpack-query-loader](https://github.com/Calvin-LL/webpack-query-loader) or use webpack's `resourceQuery` (like the examples in [webpack-image-placeholder-loader](https://github.com/Calvin-LL/webpack-image-placeholder-loader)). If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/Calvin-LL/webpack-image-srcset-loader)
+Note: if you only want to shrink some but not all images use webpack's `oneOf` (like in the [examples](#examples)). If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/Calvin-LL/webpack-image-srcset-loader)
 
 #### webpack.config.js
 
 ```javascript
 module.exports = {
-  ...
+  // ...
   module: {
     rules: [
+      // ...
       {
+        // make all imported images to have max width 1000px
         test: /\.(png|jpe?g|webp|tiff?)$/i,
         use: [
           {
             loader: "webpack-image-resize-loader",
             options: {
               width: 1000,
-              format: "webp",
-              quality: 80,
             },
           },
         ],
@@ -53,7 +53,6 @@ module.exports = {
     ],
   },
 };
-
 ```
 
 #### You can override options with queries

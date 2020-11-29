@@ -25,12 +25,33 @@ module.exports = {
             loader: "webpack-image-resize-loader",
             options: {
               width: 1000,
-              format: "webp",
-              quality: 80,
             },
           },
         ],
       },
+      /*
+      {
+        test: /\.(png|jpe?g|webp|tiff?)$/i,
+        oneOf: [
+          {
+            // if the import url looks like "some.png?resize..."
+            resourceQuery: /resize/,
+            use: [
+              {
+                loader: "webpack-image-resize-loader",
+                options: {
+                  width: 1000,
+                },
+              },
+            ],
+          },
+          {
+            // if no previous resourceQuery match
+            use: "file-loader",
+          },
+        ],
+      },
+      */
     ],
   },
   plugins: [
