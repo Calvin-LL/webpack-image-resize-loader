@@ -11,6 +11,7 @@ module.exports = {
       });
 
     /*
+    // if you only want to resize some but not all images
     config.module
       .rule("images")
       .test(/\.(png|jpe?g|webp|tiff?)$/i)
