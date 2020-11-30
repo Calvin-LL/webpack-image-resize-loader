@@ -58,6 +58,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: See [CHANGELOG.md](https://github.com/Calvin-LL/webpack-image-resize-loader/blob/master/CHANGELOG.md)
+          body: See [CHANGELOG.md](https://github.com/Calvin-LL/webpack-image-resize-loader/blob/main/CHANGELOG.md)
           draft: false
           prerelease: false
