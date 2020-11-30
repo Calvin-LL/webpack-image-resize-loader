@@ -12,6 +12,10 @@ Supports JPEG, PNG, WebP, and, TIFF images.
 
 [Vue](https://github.com/Calvin-LL/webpack-image-resize-loader/tree/master/examples/vue)
 
+[React example with other related loaders](https://github.com/Calvin-LL/react-responsive-images-example)
+
+[Vue example with other related loaders](https://github.com/Calvin-LL/vue-responsive-images-example)
+
 ## Install
 
 Install with npm:
