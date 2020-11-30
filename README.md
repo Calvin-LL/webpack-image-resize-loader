@@ -30,6 +30,18 @@ Install with yarn:
 yarn add --dev webpack-image-resize-loader
 ```
 
+#### For better optimized images (optional)
+
+Install [libvips](https://github.com/libvips/libvips) with its optional dependencies
+
+On macOS with homebrew:
+
+```
+brew install vips
+```
+
+Other OSs: [install libvips](https://libvips.github.io/libvips/install.html)
+
 ## Usage
 
 Note: if you only want to shrink some but not all images use webpack's `oneOf` (like in the [examples](#examples)). If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/Calvin-LL/webpack-image-srcset-loader)
