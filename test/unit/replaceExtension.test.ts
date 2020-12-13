@@ -7,3 +7,7 @@ it("should change the path to the format", () => {
 it("should leave the path alone if given the same format", () => {
   expect(replaceExtension("image.png", "png")).toBe("image.png");
 });
+
+it("should leave the path alone if given no format", () => {
+  expect(replaceExtension("image.png", undefined)).toBe("image.png");
+});

@@ -30,18 +30,6 @@ Install with yarn:
 yarn add --dev webpack-image-resize-loader
 ```
 
-#### For better optimized images (optional)
-
-Install [libvips](https://github.com/libvips/libvips) with its optional dependencies
-
-On macOS with homebrew:
-
-```
-brew install vips
-```
-
-Other OSs: [install libvips](https://libvips.github.io/libvips/install.html)
-
 ## Usage
 
 Note: if you only want to shrink some but not all images use webpack's `oneOf` (like in the [examples](#examples)). If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/Calvin-LL/webpack-image-srcset-loader)
@@ -96,7 +84,8 @@ import placeholderUrl from './some_pic.png?{"width":500}';
 | **[`background`](#background)**               | `string\|object`                                             | `{r:0,g:0,b:0,alpha:1}`                       | The background color of the image.                                                           |
 | **[`format`](#format)**                       | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"`                     | `undefined`                                   | The format of the output file.                                                               |
 | **[`quality`](#quality)**                     | `number`                                                     | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                             |
-| **[`sharpOptions`](#sharpoptions)**           | `object`                                                     | `undefined`                                   | Additional options for [sharp](https://sharp.pixelplumbing.com).                             |
+| **[`sharpOptions`](#sharpoptions)**           | `object`                                                     | [see below](#sharpoptions)                    | Additional options for [sharp](https://sharp.pixelplumbing.com).                             |
+| **[`imageminOptions`](#imageminoptions)**     | `string\|object\|array`                                      | [see below](#imageminoptions)                 | Additional options for [imagemin](https://github.com/imagemin/imagemin).                     |
 | **[`fileLoaderOptions`](#fileloaderoptions)** | `object`                                                     | `undefined`                                   | Additional options for [file-loader](https://github.com/webpack-contrib/file-loader).        |
 
 ### `width`
@@ -153,9 +142,22 @@ When unspecified, outputs the same format as the imported file.
 
 From 1-100, 1 being most compression and worst quality, 100 being least compression and best quality.
 
-This is passed as `quality` in the [the parameters of sharp's png, jpeg, webp, and png function](https://sharp.pixelplumbing.com/api-output)
+This is passed as `quality` in the the options objects of [imagemin plugins](#imageminoptions)
 
 ### `sharpOptions`
+
+##### default
+
+quality is kept at 100 so [imagemin](https://github.com/imagemin/imagemin) will do the compression
+
+```javascript
+{
+  png: { quality: 100 },
+  jpeg: { quality: 100 },
+  webp: { quality: 100 },
+  tiff: { quality: 100 },
+}
+```
 
 sharpOptions can have any of the following keys: `resize`, `png`, `jpeg`, `webp`, and `tiff`. These options will override options specified above.
 
@@ -168,6 +170,63 @@ as in
   jpeg: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#jpeg
   webp: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#webp
   tiff: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#tiff
+}
+```
+
+### `imageminOptions`
+
+##### default
+
+```javascript
+{
+  png: {
+    name: "imagemin-optipng",
+    options: { interlaced: true, optimizationLevel: 7 },
+  },
+  jpeg: {
+    name: "imagemin-mozjpeg",
+    options: { quality: 80 },
+  },
+  webp: {
+    name: "imagemin-webp",
+    options: { quality: 75 },
+  },
+}
+```
+
+imageminOptions can have any of the following keys: `png`, `jpeg`, `webp`, and `tiff`.
+
+This loader uses 3 built-in [imagemin](https://github.com/imagemin/imagemin) plugins to optimize images, [imagemin-optipng](https://github.com/imagemin/imagemin-optipng), [imagemin-mozjpeg](https://github.com/imagemin/imagemin-mozjpeg), and [imagemin-webp](https://github.com/imagemin/imagemin-webp). The [`quality`](#quality) option above will override the `quality` field of every plugin.
+
+If you want to use some other plugins or multiple plugins, first install the plugin you want to use, then:
+
+```javascript
+{
+  imageminOptions: {
+    png: "imagemin-pngquant";
+  }
+}
+// or
+{
+  imageminOptions: {
+    png: ["imagemin-optipng", "imagemin-pngquant"];
+  }
+}
+// or
+{
+  imageminOptions: {
+    png: ["imagemin-optipng", { name: "imagemin-pngquant", options: {} }];
+  }
+}
+```
+
+To disable imagemin for a particular format:
+
+```javascript
+{
+  imageminOptions: {
+    png: null;
+  }
 }
 ```
 

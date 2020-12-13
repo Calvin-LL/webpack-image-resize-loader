@@ -22,7 +22,7 @@ describe.each([4, 5] as const)('v%d "quality" option', (webpackVersion) => {
     });
   });
 
-  it("should work with 80", async () => {
+  it("should work with 80 with width 10px", async () => {
     const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
     const bundle = await compiler.compile({
       loaderOptions: {

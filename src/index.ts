@@ -1,7 +1,5 @@
 import fileLoader from "file-loader";
-import mime from "mime";
-import path from "path";
-import replaceExt from "replace-ext";
+import imagemin from "imagemin";
 import { validate } from "schema-utils";
 import { Schema } from "schema-utils/declarations/validate";
 import sharp from "sharp";
@@ -10,7 +8,17 @@ import { loader } from "webpack";
 
 import { getOptions } from "@calvin-l/webpack-loader-util";
 
+import getFormat from "./helpers/getFormat";
+import getImageminPlugins from "./helpers/getImageminPlugins";
+import normalizeImageminOption from "./helpers/normalizeImageminOption";
+import replaceExtension from "./helpers/replaceExtension";
 import schema from "./options.json";
+
+export type ImageminOption =
+  | null
+  | string
+  | { name: string; options?: Record<string, any> }
+  | (string | { name: string; options?: Record<string, any> })[];
 
 export interface Options {
   readonly width?: number;
@@ -49,10 +57,19 @@ export interface Options {
     readonly webp?: Partial<sharp.WebpOptions>;
     readonly tiff?: Partial<sharp.TiffOptions>;
   };
+  readonly imageminOptions?: {
+    readonly png?: ImageminOption;
+    readonly jpeg?: ImageminOption;
+    readonly webp?: ImageminOption;
+    readonly tiff?: ImageminOption;
+  };
   readonly fileLoaderOptions?: Partial<fileLoader.Options>;
 }
 
-export type FullOptions = Options & Required<Pick<Options, "scaleUp">>;
+export type FullOptions = Options &
+  Required<
+    Pick<Options, "scaleUp" | "format" | "sharpOptions" | "imageminOptions">
+  >;
 
 export const raw = true;
 
@@ -65,10 +82,39 @@ export default function (
   const defaultOptions: FullOptions = {
     format: getFormat(this.resourcePath),
     scaleUp: false,
+    sharpOptions: {
+      png: { quality: 100 },
+      jpeg: { quality: 100 },
+      webp: { quality: 100 },
+      tiff: { quality: 100 },
+    },
+    imageminOptions: {
+      png: {
+        name: "imagemin-optipng",
+        options: { interlaced: true, optimizationLevel: 7 },
+      },
+      jpeg: {
+        name: "imagemin-mozjpeg",
+        options: { quality: 80 },
+      },
+      webp: {
+        name: "imagemin-webp",
+        options: { quality: 75 },
+      },
+    },
   };
-  const options: Options = {
+  const rawOptions = getOptions<Options>(this, true, true);
+  const options: FullOptions = {
     ...defaultOptions,
-    ...getOptions<Options>(this, true, true),
+    sharpOptions: {
+      ...defaultOptions.sharpOptions,
+      ...rawOptions.sharpOptions,
+    },
+    imageminOptions: {
+      ...defaultOptions.imageminOptions,
+      ...rawOptions.imageminOptions,
+    },
+    ...rawOptions,
   };
 
   validate(schema as Schema, options, {
@@ -108,7 +154,8 @@ async function processImage(
     quality,
     scaleUp,
     sharpOptions,
-  }: Options
+    imageminOptions,
+  }: FullOptions
 ): Promise<Buffer> {
   let sharpImage = sharp(Buffer.from(content));
   const {
@@ -144,34 +191,23 @@ async function processImage(
     });
   }
 
-  if (format)
-    sharpImage = sharpImage[format]({ quality, ...sharpOptions?.[format] });
+  sharpImage = sharpImage[format]({
+    ...sharpOptions?.[format],
+  });
 
-  return await sharpImage.toBuffer();
-}
+  const normalizedImageminOptions = normalizeImageminOption(
+    imageminOptions?.[format]
+  );
+  const imageminPlugins = getImageminPlugins(normalizedImageminOptions, {
+    ...(quality ? { quality } : {}),
+  });
+  const sharpImageOutput = await sharpImage.toBuffer();
 
-function replaceExtension(
-  resourcePath: string,
-  format: string | undefined
-): string {
-  if (!format) return resourcePath;
-  if (mime.getType(format) === mime.getType(path.extname(resourcePath)))
-    return resourcePath;
+  if (imageminPlugins === undefined) return sharpImageOutput;
 
-  return replaceExt(resourcePath, `.${format}`);
-}
+  const imageminOutput = await imagemin.buffer(sharpImageOutput, {
+    plugins: imageminPlugins,
+  });
 
-function getFormat(resourcePath: string): Options["format"] {
-  const type = mime.getType(resourcePath);
-
-  switch (type) {
-    case "image/jpeg":
-      return "jpeg";
-    case "image/png":
-      return "png";
-    case "image/webp":
-      return "webp";
-    case "image/tiff":
-      return "tiff";
-  }
+  return imageminOutput;
 }

@@ -16,8 +16,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint --ext .ts .",
-    "lint:fix": "eslint --fix --ext .ts .",
+    "lint": "eslint --max-warnings 0 --ext .ts .",
+    "lint:fix": "eslint --max-warnings 0 --fix --ext .ts .",
     "lint:markdown": "remark .",
     "test": "tsc --project tsconfig.test-build.json && jest",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version"
@@ -45,6 +45,10 @@
   "dependencies": {
     "@calvin-l/webpack-loader-util": "^1.0.2",
     "file-loader": "^6.2.0",
+    "imagemin": "^7.0.1",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-webp": "^6.0.0",
     "mime": "^2.4.6",
     "replace-ext": "^2.0.0",
     "schema-utils": "^3.0.0",
@@ -55,6 +59,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@types/file-loader": "^4.2.0",
+    "@types/imagemin": "^7.0.0",
     "@types/jest": "^26.0.15",
     "@types/jest-image-snapshot": "^4.1.3",
     "@types/mime": "^2.0.3",

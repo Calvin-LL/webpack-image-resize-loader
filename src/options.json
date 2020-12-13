@@ -70,6 +70,163 @@
         "tiff": { "type": "object", "additionalProperties": true }
       }
     },
+    "imageminOptions": {
+      "type": "object",
+      "properties": {
+        "png": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "options": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "jpeg": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "options": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "webp": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "options": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "tiff": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "options": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
     "fileLoaderOptions": {
       "type": "object",
       "additionalProperties": true
