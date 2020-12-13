@@ -7,10 +7,6 @@ module.exports = {
     path: path.resolve(__dirname, "./build"),
     filename: "main.js",
   },
-  // to hide performance hints on compile, do not add this to your code
-  performance: {
-    hints: false,
-  },
   module: {
     rules: [
       {
