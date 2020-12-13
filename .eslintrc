@@ -9,16 +9,16 @@
   "ignorePatterns": ["dist/", "test-dist/"],
   "rules": {
     "no-undef": "off",
-    "no-console": ["error", { "allow": ["warn", "error"] }],
-    "no-debugger": "error",
-    "no-unused-vars": "error",
-    "@typescript-eslint/no-empty-function": "error",
+    "no-unused-vars": "off",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-debugger": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/ban-ts-comment": [
-      "error",
+      "warn",
       {
         "ts-expect-error": "allow-with-description",
         "ts-ignore": true,
