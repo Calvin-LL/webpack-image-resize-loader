@@ -4,6 +4,10 @@ it("should normalize undefined", () => {
   expect(normalizeImageminOption(undefined)).toBe(undefined);
 });
 
+it("should normalize null", () => {
+  expect(normalizeImageminOption(null)).toBe(undefined);
+});
+
 it('should normalize "imagemin-optipng"', () => {
   expect(normalizeImageminOption("imagemin-optipng")).toMatchObject([
     {
