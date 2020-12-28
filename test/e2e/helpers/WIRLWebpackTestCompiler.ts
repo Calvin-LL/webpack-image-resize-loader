@@ -21,8 +21,8 @@ export default class WIRLWebpackTestCompiler extends WebpackTestCompiler {
       outputPath: path.resolve(__dirname, "../outputs"),
       rules: [
         {
-          test: /(png|jpg|svg)/i,
-          rules: [
+          test: /\.(png|jpg|svg)$/i,
+          use: [
             {
               loader: path.resolve(__dirname, "../../../test-dist/cjs.js"),
               options: {
