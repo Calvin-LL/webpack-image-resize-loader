@@ -14,6 +14,6 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
-    "webpack-image-resize-loader": "^3.1.0"
+    "webpack-image-resize-loader": "file:../.."
   }
 }
