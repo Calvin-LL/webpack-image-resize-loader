@@ -12,9 +12,9 @@ describe.each([4, 5] as const)('v%d "fit" option', (webpackVersion) => {
         width: 10,
         height: 10,
         fit: "cover",
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -31,9 +31,9 @@ describe.each([4, 5] as const)('v%d "fit" option', (webpackVersion) => {
         width: 10,
         height: 10,
         fit: "contain",
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -50,9 +50,9 @@ describe.each([4, 5] as const)('v%d "fit" option', (webpackVersion) => {
         width: 10,
         height: 10,
         fit: "fill",
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 

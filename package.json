@@ -44,7 +44,6 @@
   },
   "dependencies": {
     "@calvin-l/webpack-loader-util": "^1.0.2",
-    "file-loader": "^6.2.0",
     "imagemin": "^7.0.1",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
@@ -73,6 +72,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.17.0",
     "eslint-plugin-import-helpers": "^1.1.0",
+    "file-loader": "^6.2.0",
     "husky": "^4.3.6",
     "jest": "^26.6.3",
     "jest-image-snapshot": "^4.3.0",

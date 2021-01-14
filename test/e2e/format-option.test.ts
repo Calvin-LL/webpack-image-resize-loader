@@ -11,9 +11,9 @@ describe.each([4, 5] as const)('v%d "format" option', (webpackVersion) => {
       loaderOptions: {
         width: 10,
         format: "jpeg",
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 

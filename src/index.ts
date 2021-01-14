@@ -1,9 +1,9 @@
 import fileLoader from "file-loader";
 import imagemin from "imagemin";
+import { parseQuery } from "loader-utils";
 import { validate } from "schema-utils";
 import { Schema } from "schema-utils/declarations/validate";
 import sharp from "sharp";
-import { RawSourceMap } from "source-map";
 import { loader } from "webpack";
 
 import { getOptions } from "@calvin-l/webpack-loader-util";
@@ -11,7 +11,7 @@ import { getOptions } from "@calvin-l/webpack-loader-util";
 import getFormat from "./helpers/getFormat";
 import getImageminPlugins from "./helpers/getImageminPlugins";
 import normalizeImageminOption from "./helpers/normalizeImageminOption";
-import replaceExtension from "./helpers/replaceExtension";
+import requireResolve from "./helpers/requireResolve";
 import schema from "./options.json";
 
 export type ImageminOption =
@@ -63,20 +63,31 @@ export interface Options {
     readonly webp?: ImageminOption;
     readonly tiff?: ImageminOption;
   };
-  readonly fileLoaderOptions?: Partial<fileLoader.Options>;
+  readonly fileLoader?: string;
+  readonly fileLoaderOptionsGenerator?: (
+    options: Omit<FullOptions, "optionsGenerator">,
+    existingOptions: Record<string, any> | undefined
+  ) => Record<string, any>;
 }
 
 export type FullOptions = Options &
   Required<
-    Pick<Options, "scaleUp" | "format" | "sharpOptions" | "imageminOptions">
+    Pick<
+      Options,
+      | "scaleUp"
+      | "format"
+      | "sharpOptions"
+      | "imageminOptions"
+      | "fileLoader"
+      | "fileLoaderOptionsGenerator"
+    >
   >;
 
 export const raw = true;
 
 export default function (
   this: loader.LoaderContext,
-  content: ArrayBuffer,
-  sourceMap?: RawSourceMap
+  content: ArrayBuffer
 ): void {
   const callback = this.async() as loader.loaderCallback;
   const defaultOptions: FullOptions = {
@@ -102,6 +113,8 @@ export default function (
         options: { quality: 75 },
       },
     },
+    fileLoader: "file-loader",
+    fileLoaderOptionsGenerator: defaultFileLoaderOptionsGenerator,
   };
   const rawOptions = getOptions<Options>(this, true, true);
   const options: FullOptions = {
@@ -124,21 +137,86 @@ export default function (
 
   processImage(content, options)
     .then((result) => {
-      const fileLoaderContext = {
-        ...this,
-        resourcePath: replaceExtension(this.resourcePath, options.format),
-        query: options.fileLoaderOptions,
-      };
-      const fileLoaderResult = fileLoader.call(
-        fileLoaderContext,
-        result,
-        sourceMap
-      );
-      callback(null, fileLoaderResult);
+      replaceFileLoaderOptions(this, options, rawOptions);
+
+      callback(null, result);
     })
-    .catch((e) => {
-      throw e;
+    .catch((error) => {
+      callback(error, undefined);
     });
+}
+
+export function defaultFileLoaderOptionsGenerator(
+  { format }: Omit<FullOptions, "optionsGenerator">,
+  existingOptions: fileLoader.Options | undefined
+): fileLoader.Options {
+  let name = existingOptions?.name;
+
+  if (name === undefined) {
+    name = `[contenthash].${format}`;
+  } else if (typeof name === "string") {
+    name = name.replace("[ext]", format);
+  } else if (typeof name === "function") {
+    name = (file: string) => {
+      const nameFn = existingOptions!.name as (file: string) => string;
+
+      return nameFn(file).replace("[ext]", format);
+    };
+  }
+
+  return {
+    ...existingOptions,
+    name,
+  };
+}
+
+function replaceFileLoaderOptions(
+  context: loader.LoaderContext,
+  options: FullOptions,
+  rawOptions: Options
+): void {
+  const { fileLoader: fileLoaderName, fileLoaderOptionsGenerator } = options;
+  const loaders = context.loaders as {
+    path: string;
+    request: string;
+    options?: Record<string, any> | string;
+  }[];
+
+  let fileLoaderNameOrPath = fileLoaderName;
+
+  // try to resolve path, if path not found, try to find by
+  // fileLoaderName directly
+  try {
+    fileLoaderNameOrPath = requireResolve(fileLoaderName);
+    // eslint-disable-next-line no-empty
+  } catch (e) {}
+
+  const fileLoader = loaders.find(
+    ({ path }, index) =>
+      index < context.loaderIndex && path === fileLoaderNameOrPath
+  );
+
+  if (fileLoader === undefined) {
+    if (
+      rawOptions.fileLoader !== undefined ||
+      rawOptions.fileLoaderOptionsGenerator !== undefined
+    ) {
+      // only throw when either fileLoader or fileLoaderOptionsGenerator is set
+      // don't want to throw if using url-loader for example
+      throw new Error(
+        `Can't find "${fileLoaderName}" in the list of loaders before webpack-image-resize-loader`
+      );
+    } else {
+      return;
+    }
+  }
+
+  const fileLoaderOptions =
+    typeof fileLoader.options === "string"
+      ? parseQuery("?" + fileLoader.options)
+      : fileLoader.options;
+
+  fileLoader.options = fileLoaderOptionsGenerator(options, fileLoaderOptions);
 }
 
 async function processImage(

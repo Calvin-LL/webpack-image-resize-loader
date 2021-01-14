@@ -13,9 +13,9 @@ describe.each([4, 5] as const)('v%d "position" option', (webpackVersion) => {
         height: 10,
         fit: "contain",
         position: "right",
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 

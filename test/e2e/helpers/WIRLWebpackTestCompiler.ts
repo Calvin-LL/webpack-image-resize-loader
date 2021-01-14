@@ -9,13 +9,18 @@ interface WIRLCompileOptions
   extends Omit<WebpackTestCompiler.CompileOptions, "entryFilePath"> {
   entryFileName?: string;
   loaderOptions?: any;
+  fileLoaderOptions?: any;
 }
 
 export default class WIRLWebpackTestCompiler extends WebpackTestCompiler.default {
   compile(
     options: WIRLCompileOptions = {}
   ): Promise<WebpackTestBundle.default> {
-    const { loaderOptions = {}, entryFileName = "index.js" } = options;
+    const {
+      loaderOptions,
+      fileLoaderOptions,
+      entryFileName = "index.js",
+    } = options;
     const fixturesDir = path.resolve(__dirname, "../fixtures");
 
     this.webpackConfig = {
@@ -26,13 +31,16 @@ export default class WIRLWebpackTestCompiler extends WebpackTestCompiler.default
           test: /\.(png|jpg|svg)$/i,
           use: [
             {
+              loader: "file-loader",
+              options: {
+                ...fileLoaderOptions,
+                esModule: false,
+              },
+            },
+            {
               loader: path.resolve(__dirname, "../../../test-dist/cjs.js"),
               options: {
                 ...loaderOptions,
-                fileLoaderOptions: {
-                  esModule: false,
-                  ...loaderOptions?.fileLoaderOptions,
-                },
               },
             },
           ],

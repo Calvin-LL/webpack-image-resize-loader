@@ -20,6 +20,16 @@ exports[`v4 validate options should throw an error on the "background" option wi
       object { … }"
 `;
 
+exports[`v4 validate options should throw an error on the "fileLoader" option with 0 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.fileLoader should be a string."
+`;
+
+exports[`v4 validate options should throw an error on the "fileLoaderOptionsGenerator" option with 0 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.fileLoaderOptionsGenerator should be an instance of function."
+`;
+
 exports[`v4 validate options should throw an error on the "fit" option with "0" value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.fit should be one of these:
@@ -35,8 +45,7 @@ exports[`v4 validate options should throw an error on the "fit" option with true
 exports[`v4 validate options should throw an error on the "format" option with true value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.format should be one of these:
-   \\"jpeg\\" | \\"png\\" | \\"webp\\" | \\"tiff\\"
-   -> The format of the output file. When unspecified, outputs the same format as the imported file."
+   \\"jpeg\\" | \\"png\\" | \\"webp\\" | \\"tiff\\""
 `;
 
 exports[`v4 validate options should throw an error on the "height" option with 0 value 1`] = `
@@ -74,26 +83,22 @@ exports[`v4 validate options should throw an error on the "position" option with
 
 exports[`v4 validate options should throw an error on the "quality" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.quality should be >= 1.
-   -> The quality of the output image. Default to 80 for JPEG, WebP, and TIFF, default to 100 for PNG."
+ - options.quality should be >= 1."
 `;
 
 exports[`v4 validate options should throw an error on the "scale" option with -1 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be > 0.
-   -> The fraction of the original size of the output image. If both this and \`width\` or \`height\` are set, \`width\` or \`height\` takes precedence."
+ - options.scale should be > 0."
 `;
 
 exports[`v4 validate options should throw an error on the "scale" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be > 0.
-   -> The fraction of the original size of the output image. If both this and \`width\` or \`height\` are set, \`width\` or \`height\` takes precedence."
+ - options.scale should be > 0."
 `;
 
 exports[`v4 validate options should throw an error on the "scaleUp" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scaleUp should be a boolean.
-   -> Whether or not to scale up the image when the desired size is larger than the image size. Default to false."
+ - options.scaleUp should be a boolean."
 `;
 
 exports[`v4 validate options should throw an error on the "sharpOptions" option with 0 value 1`] = `
@@ -137,6 +142,16 @@ exports[`v5 validate options should throw an error on the "background" option wi
       object { … }"
 `;
 
+exports[`v5 validate options should throw an error on the "fileLoader" option with 0 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.fileLoader should be a string."
+`;
+
+exports[`v5 validate options should throw an error on the "fileLoaderOptionsGenerator" option with 0 value 1`] = `
+"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
+ - options.fileLoaderOptionsGenerator should be an instance of function."
+`;
+
 exports[`v5 validate options should throw an error on the "fit" option with "0" value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.fit should be one of these:
@@ -152,8 +167,7 @@ exports[`v5 validate options should throw an error on the "fit" option with true
 exports[`v5 validate options should throw an error on the "format" option with true value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.format should be one of these:
-   \\"jpeg\\" | \\"png\\" | \\"webp\\" | \\"tiff\\"
-   -> The format of the output file. When unspecified, outputs the same format as the imported file."
+   \\"jpeg\\" | \\"png\\" | \\"webp\\" | \\"tiff\\""
 `;
 
 exports[`v5 validate options should throw an error on the "height" option with 0 value 1`] = `
@@ -191,26 +205,22 @@ exports[`v5 validate options should throw an error on the "position" option with
 
 exports[`v5 validate options should throw an error on the "quality" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.quality should be >= 1.
-   -> The quality of the output image. Default to 80 for JPEG, WebP, and TIFF, default to 100 for PNG."
+ - options.quality should be >= 1."
 `;
 
 exports[`v5 validate options should throw an error on the "scale" option with -1 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be > 0.
-   -> The fraction of the original size of the output image. If both this and \`width\` or \`height\` are set, \`width\` or \`height\` takes precedence."
+ - options.scale should be > 0."
 `;
 
 exports[`v5 validate options should throw an error on the "scale" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scale should be > 0.
-   -> The fraction of the original size of the output image. If both this and \`width\` or \`height\` are set, \`width\` or \`height\` takes precedence."
+ - options.scale should be > 0."
 `;
 
 exports[`v5 validate options should throw an error on the "scaleUp" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.scaleUp should be a boolean.
-   -> Whether or not to scale up the image when the desired size is larger than the image size. Default to false."
+ - options.scaleUp should be a boolean."
 `;
 
 exports[`v5 validate options should throw an error on the "sharpOptions" option with 0 value 1`] = `

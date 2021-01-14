@@ -46,6 +46,7 @@ module.exports = {
         // make all imported images to have max width 1000px
         test: /\.(png|jpe?g|webp|tiff?)$/i,
         use: [
+          "file-loader",
           {
             loader: "webpack-image-resize-loader",
             options: {
@@ -73,32 +74,33 @@ import placeholderUrl from './some_pic.png?{"width":500}';
 
 ## Options
 
-| Name                                          | Type                                                         | Default                                       | Description                                                                                  |
-| --------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **[`width`](#width)**                         | `number`                                                     | `undefined`                                   | The width of the output image.                                                               |
-| **[`height`](#height)**                       | `number`                                                     | `undefined`                                   | The height of the output image.                                                              |
-| **[`scale`](#scale)**                         | `number`                                                     | `undefined`                                   | The fraction of the original size of the output image. `width` and `height` take precedence. |
-| **[`scaleUp`](#scaleup)**                     | `boolean`                                                    | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size.    |
-| **[`fit`](#fit)**                             | `"cover"`, `"contain"`, `"fill"`, `"inside"`, or `"outside"` | `"cover"`                                     | How the image should be resized to fit both provided dimensions.                             |
-| **[`position`](#position)**                   | See **[`position`](#position)**                              | `"centre"`                                    | Where the image is positioned.                                                               |
-| **[`background`](#background)**               | `string\|object`                                             | `{r:0,g:0,b:0,alpha:1}`                       | The background color of the image.                                                           |
-| **[`format`](#format)**                       | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"`                     | `undefined`                                   | The format of the output file.                                                               |
-| **[`quality`](#quality)**                     | `number`                                                     | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                             |
-| **[`sharpOptions`](#sharpoptions)**           | `object`                                                     | [see below](#sharpoptions)                    | Additional options for [sharp](https://sharp.pixelplumbing.com).                             |
-| **[`imageminOptions`](#imageminoptions)**     | `string\|object\|array`                                      | [see below](#imageminoptions)                 | Additional options for [imagemin](https://github.com/imagemin/imagemin).                     |
-| **[`fileLoaderOptions`](#fileloaderoptions)** | `object`                                                     | `undefined`                                   | Additional options for [file-loader](https://github.com/webpack-contrib/file-loader).        |
+| Name                                                            | Type                                                         | Default                                       | Description                                                                                  |
+| --------------------------------------------------------------- | ------------------------------------------------------------ | --------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **[`width`](#width)**                                           | `number`                                                     | `undefined`                                   | The width of the output image.                                                               |
+| **[`height`](#height)**                                         | `number`                                                     | `undefined`                                   | The height of the output image.                                                              |
+| **[`scale`](#scale)**                                           | `number`                                                     | `undefined`                                   | The fraction of the original size of the output image. `width` and `height` take precedence. |
+| **[`scaleUp`](#scaleup)**                                       | `boolean`                                                    | `false`                                       | Whether or not to scale up the image when the desired size is larger than the image size.    |
+| **[`fit`](#fit)**                                               | `"cover"`, `"contain"`, `"fill"`, `"inside"`, or `"outside"` | `"cover"`                                     | How the image should be resized to fit both provided dimensions.                             |
+| **[`position`](#position)**                                     | See **[`position`](#position)**                              | `"centre"`                                    | Where the image is positioned.                                                               |
+| **[`background`](#background)**                                 | `string\|object`                                             | `{r:0,g:0,b:0,alpha:1}`                       | The background color of the image.                                                           |
+| **[`format`](#format)**                                         | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"`                     | `undefined`                                   | The format of the output file.                                                               |
+| **[`quality`](#quality)**                                       | `number`                                                     | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                             |
+| **[`sharpOptions`](#sharpoptions)**                             | `object`                                                     | [see below](#sharpoptions)                    | Additional options for [sharp](https://sharp.pixelplumbing.com).                             |
+| **[`imageminOptions`](#imageminoptions)**                       | `string\|object\|array`                                      | [see below](#imageminoptions)                 | Additional options for [imagemin](https://github.com/imagemin/imagemin).                     |
+| **[`fileLoader`](#fileloader)**                                 | `string`                                                     | `"file-loader"`                               | Name or path of a loader that takes in buffers. ([why?](#fileloader))                        |
+| **[`fileLoaderOptionsGenerator`](#fileloaderoptionsgenerator)** | `function`                                                   | [see below](#fileloaderoptionsgenerator)      | A function that generates options for the specified `fileLoader`.                            |
 
 ### `width`
 
-pixels wide the resultant image should be. Use `null` or `undefined` to auto-scale the width to match the height.
+Pixels width the resultant image should be. Use `null` or `undefined` to auto-scale the width to match the height.
 
-this is passed as `width` to the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `width` to the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `height`
 
-pixels high the resultant image should be. Use null or undefined to auto-scale the height to match the width.
+Pixels height the resultant image should be. Use null or undefined to auto-scale the height to match the width.
 
-this is passed as `height` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `height` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `scale`
 
@@ -112,7 +114,7 @@ When true, images will be scaled up to a larger size. When false, if the desired
 
 ### `fit`
 
-this is passed as `fit` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `fit` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `position`
 
@@ -124,7 +126,7 @@ position, gravity or strategy to use when `fit` is `cover` or `contain`.
 - `sharp.gravity`: `north`, `northeast`, `east`, `southeast`, `south`, `southwest`, `west`, `northwest`, `center` or `centre`.
 - `sharp.strategy`: `cover` only, dynamically crop using either the `entropy` or `attention` strategy.
 
-this is passed as `position` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `position` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `background`
 
@@ -132,7 +134,7 @@ example: `"#7743CE"`, `"rgb(255, 255, 255)"`, `{r:0,g:0,b:0,alpha:1}`
 
 background colour when using a `fit` of `contain`, parsed by the [color](https://www.npmjs.com/package/color) module, defaults to black without transparency.
 
-this is passed as `background` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `background` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `format`
 
@@ -230,6 +232,41 @@ To disable imagemin for a particular format:
 }
 ```
 
+### `fileLoader`
+
+Name or path of a loader that takes in buffers.
+
+This is needed because the output file format is sometimes different from the input file format.
+
+By default this loader tries to find `file-loader` and change the `"[ext]"` in their `options.name`.
+
 ### `fileLoaderOptions`
 
-fileLoaderOptions is passed as the options object internally to [file-loader](https://github.com/webpack-contrib/file-loader) to save a file. Go to [file-loader](https://github.com/webpack-contrib/file-loader) to find the available options.
+##### default
+
+`options` is the options passed to this loader, `existingOptions` is the options passed to the loader specified in [`fileLoader`](#fileloader)
+
+```javascript
+function defaultFileLoaderOptionsGenerator(options, existingOptions) {
+  let name = existingOptions?.name;
+
+  if (name === undefined) {
+    name = `[contenthash].${options.format}`;
+  } else if (typeof name === "string") {
+    name = name.replace("[ext]", options.format);
+  } else if (typeof name === "function") {
+    name = (file: string) => {
+      const nameFn = existingOptions.name;
+
+      return nameFn(file).replace("[ext]", format);
+    };
+  }
+
+  return {
+    ...existingOptions,
+    name,
+  };
+}
+```
+
+This function is used to generate the options for the loader specified by [`fileLoader`](#fileloader)

@@ -85,6 +85,14 @@ describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
       ],
       failure: [0],
     },
+    fileLoader: {
+      success: ["file-loader"],
+      failure: [0],
+    },
+    fileLoaderOptionsGenerator: {
+      success: [(_: any, o: any) => o],
+      failure: [0],
+    },
   };
 
   function createTestCase(
