@@ -191,19 +191,10 @@ function replaceFileLoaderOptions(
     // eslint-disable-next-line no-empty
   } catch (e) {}
 
-  const fileLoaderMatches = loaders.filter(
+  const fileLoader = loaders.find(
     ({ path }, index) =>
-      index < context.loaderIndex && path.includes(fileLoaderNameOrPath)
+      index < context.loaderIndex && path === fileLoaderNameOrPath
   );
-
-  // found fileLoader if there is only 1 match, find exact match if found multiple
-  const fileLoader =
-    fileLoaderMatches.length === 1
-      ? fileLoaderMatches[0]
-      : fileLoaderMatches.find(
-          ({ path }, index) =>
-            index < context.loaderIndex && path === fileLoaderNameOrPath
-        );
 
   if (fileLoader === undefined) {
     if (
