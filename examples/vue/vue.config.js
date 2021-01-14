@@ -11,7 +11,9 @@ module.exports = {
       .loader("webpack-image-resize-loader")
       .options({
         width: 1000,
-        fileLoader: "url-loader",
+        // this is needed for this example because "webpack-image-resize-loader" is not in ./node_modules
+        // if you're copying this code, you most likely won't need this
+        fileLoader: require.resolve("url-loader"),
         fileLoaderOptionsGenerator: (options, existingOptions) => ({
           ...existingOptions,
           fallback: {
@@ -36,14 +38,20 @@ module.exports = {
       .loader("webpack-image-resize-loader")
       .options({
         width: 1000,
-      })
-      .end()
-      .end()
-      // if no previous resourceQuery match
-      .oneOf("normal")
-      .use("normal")
-      .loader(config.module.rule("images").use("url-loader").get("loader"))
-      .options(config.module.rule("images").use("url-loader").get("options"));
-    */
+        // this is needed for this example because "webpack-image-resize-loader" is not in ./node_modules
+        // if you're copying this code, you most likely won't need this
+        fileLoader: require.resolve("url-loader"),
+        fileLoaderOptionsGenerator: (options, existingOptions) => ({
+          ...existingOptions,
+          fallback: {
+            ...existingOptions.fallback,
+            options: defaultFileLoaderOptionsGenerator(
+              options,
+              existingOptions.fallback.options
+            ),
+          },
+        }),
+      });
+      */
   },
 };
