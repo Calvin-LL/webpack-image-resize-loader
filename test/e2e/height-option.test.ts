@@ -10,9 +10,9 @@ describe.each([4, 5] as const)('v%d "height" option', (webpackVersion) => {
     const bundle = await compiler.compile({
       loaderOptions: {
         height: 14,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -27,9 +27,9 @@ describe.each([4, 5] as const)('v%d "height" option', (webpackVersion) => {
     const bundle = await compiler.compile({
       loaderOptions: {
         height: 10000000,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 

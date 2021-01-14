@@ -10,9 +10,9 @@ describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
     const bundle = await compiler.compile({
       loaderOptions: {
         scale: 1,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -27,9 +27,9 @@ describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
     const bundle = await compiler.compile({
       loaderOptions: {
         scale: 0.5,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -45,9 +45,9 @@ describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
       loaderOptions: {
         width: 10,
         scale: 0.5,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -63,9 +63,9 @@ describe.each([4, 5] as const)('v%d "scale" option', (webpackVersion) => {
       loaderOptions: {
         height: 14,
         scale: 0.5,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 

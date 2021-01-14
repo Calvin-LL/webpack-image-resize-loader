@@ -10,9 +10,9 @@ describe.each([4, 5] as const)('v%d "quality" option', (webpackVersion) => {
     const bundle = await compiler.compile({
       loaderOptions: {
         quality: 80,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -28,9 +28,9 @@ describe.each([4, 5] as const)('v%d "quality" option', (webpackVersion) => {
       loaderOptions: {
         width: 10,
         quality: 80,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -46,9 +46,9 @@ describe.each([4, 5] as const)('v%d "quality" option', (webpackVersion) => {
       loaderOptions: {
         width: 10,
         quality: 1,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 

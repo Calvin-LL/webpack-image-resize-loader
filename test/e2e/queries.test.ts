@@ -10,9 +10,9 @@ describe.each([4, 5] as const)("v%d queries", (webpackVersion) => {
     const bundle = await compiler.compile({
       loaderOptions: {
         width: 100,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
       fileContentOverride: `require('./Macaca_nigra_self-portrait_large.jpg?{"width": 10}')`,
     });
@@ -28,9 +28,9 @@ describe.each([4, 5] as const)("v%d queries", (webpackVersion) => {
     const bundle = await compiler.compile({
       loaderOptions: {
         scale: 1,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
       fileContentOverride:
         'require("./Macaca_nigra_self-portrait_large.jpg?scale=1.2&scaleUp=true")',

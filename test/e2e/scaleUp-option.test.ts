@@ -11,9 +11,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         width: 10,
         scaleUp: true,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -29,9 +29,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         width: 10,
         scaleUp: false,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -47,9 +47,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         width: 3000,
         scaleUp: true,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -65,9 +65,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         width: 3000,
         scaleUp: false,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -84,9 +84,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
         width: 10,
         height: 10,
         scaleUp: true,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -103,9 +103,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
         width: 10,
         height: 10,
         scaleUp: false,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -122,9 +122,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
         width: 10,
         height: 5000,
         scaleUp: true,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -141,9 +141,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
         width: 10,
         height: 5000,
         scaleUp: false,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -160,9 +160,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
         width: 5000,
         height: 10,
         scaleUp: true,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -179,9 +179,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
         width: 5000,
         height: 10,
         scaleUp: false,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -197,9 +197,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         scale: 0.5,
         scaleUp: true,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -215,9 +215,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         scale: 0.5,
         scaleUp: false,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -233,9 +233,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         scale: 1.2,
         scaleUp: true,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
@@ -251,9 +251,9 @@ describe.each([4, 5] as const)('v%d "scaleUp" option', (webpackVersion) => {
       loaderOptions: {
         scale: 2,
         scaleUp: false,
-        fileLoaderOptions: {
-          name: "image.jpg",
-        },
+      },
+      fileLoaderOptions: {
+        name: "image.jpg",
       },
     });
 
