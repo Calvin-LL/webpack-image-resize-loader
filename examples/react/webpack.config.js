@@ -17,10 +17,14 @@ module.exports = {
       {
         test: /\.(png|jpe?g|webp|tiff?)$/i,
         use: [
+          "file-loader",
           {
             loader: "webpack-image-resize-loader",
             options: {
               width: 1000,
+              // this is needed for this example because "file-loader" is also installed in ../../node_modules
+              // if you're copying this code, you most likely won't need this
+              fileLoader: require.resolve("file-loader"),
             },
           },
         ],
@@ -34,10 +38,14 @@ module.exports = {
             // if the import url looks like "some.png?resize..."
             resourceQuery: /resize/,
             use: [
+              "file-loader",
               {
                 loader: "webpack-image-resize-loader",
                 options: {
                   width: 1000,
+                  // this is needed for this example because "file-loader" is also installed in ../../node_modules
+                  // if you're copying this code, you most likely won't need this
+                  fileLoader: require.resolve("file-loader"),
                 },
               },
             ],

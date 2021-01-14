@@ -1,3 +1,6 @@
+const defaultFileLoaderOptionsGenerator = require("webpack-image-resize-loader/dist/index")
+  .defaultFileLoaderOptionsGenerator;
+
 module.exports = {
   publicPath: ".",
   chainWebpack: (config) => {
@@ -8,6 +11,17 @@ module.exports = {
       .loader("webpack-image-resize-loader")
       .options({
         width: 1000,
+        fileLoader: "url-loader",
+        fileLoaderOptionsGenerator: (options, existingOptions) => ({
+          ...existingOptions,
+          fallback: {
+            ...existingOptions.fallback,
+            options: defaultFileLoaderOptionsGenerator(
+              options,
+              existingOptions.fallback.options
+            ),
+          },
+        }),
       });
 
     /*
@@ -31,7 +45,5 @@ module.exports = {
       .loader(config.module.rule("images").use("url-loader").get("loader"))
       .options(config.module.rule("images").use("url-loader").get("options"));
     */
-
-    config.module.rule("images").uses.delete("url-loader");
   },
 };
