@@ -11,7 +11,6 @@ import { getOptions } from "@calvin-l/webpack-loader-util";
 import getFormat from "./helpers/getFormat";
 import getImageminPlugins from "./helpers/getImageminPlugins";
 import normalizeImageminOption from "./helpers/normalizeImageminOption";
-import requireResolve from "./helpers/requireResolve";
 import schema from "./options.json";
 
 export type ImageminOption =
@@ -136,11 +135,11 @@ export default function (
   });
 
   processImage(content, options)
-    .then((result) => {
-      replaceFileLoaderOptions(this, options, rawOptions);
-
-      callback(null, result);
-    })
+    .then((result) =>
+      replaceFileLoaderOptions(this, options, rawOptions).then(() => {
+        callback(null, result);
+      })
+    )
     .catch((error) => {
       callback(error, undefined);
     });
@@ -170,11 +169,32 @@ export function defaultFileLoaderOptionsGenerator(
   };
 }
 
-function replaceFileLoaderOptions(
+function resolveLoader(
+  context: loader.LoaderContext,
+  path: string
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    // get internal `enhanced-resolve` resolver
+    const resolver = context._compilation.resolverFactory.get("loader");
+
+    resolver.resolve(
+      {},
+      context.rootContext,
+      path,
+      {},
+      (err: null | Error, resolvedResource: string) => {
+        if (err) reject(err);
+        else resolve(resolvedResource);
+      }
+    );
+  });
+}
+
+async function replaceFileLoaderOptions(
   context: loader.LoaderContext,
   options: FullOptions,
   rawOptions: Options
-): void {
+): Promise<void> {
   const { fileLoader: fileLoaderName, fileLoaderOptionsGenerator } = options;
   const loaders = context.loaders as {
     path: string;
@@ -183,11 +203,10 @@ function replaceFileLoaderOptions(
   }[];
 
   let fileLoaderNameOrPath = fileLoaderName;
-
   // try to resolve path, if path not found, try to find by
   // fileLoaderName directly
   try {
-    fileLoaderNameOrPath = requireResolve(fileLoaderName);
+    fileLoaderNameOrPath = await resolveLoader(context, fileLoaderNameOrPath);
     // eslint-disable-next-line no-empty
   } catch (e) {}
 
