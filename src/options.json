@@ -227,7 +227,7 @@
       "type": "string"
     },
     "fileLoaderOptionsGenerator": {
-      "instanceof": "Function"
+      "anyOf": [{ "type": "string" }, { "instanceof": "Function" }]
     }
   }
 }

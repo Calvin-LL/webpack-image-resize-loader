@@ -94,5 +94,22 @@ describe.each([4, 5] as const)(
         format: "jpeg",
       });
     });
+
+    it("should call fileLoaderOptionsGenerator as a string", async () => {
+      const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
+      const bundle = await compiler.compile({
+        loaderOptions: {
+          width: 10,
+          fileLoaderOptionsGenerator:
+            '() => ({ esModule: false, name: "test.jpg" })',
+        },
+        fileLoaderOptions: {
+          name: "[name]-[contenthash].[ext]",
+          test: 3,
+        },
+      });
+
+      expect(bundle.execute("main.js")).toMatch("test.jpg");
+    });
   }
 );

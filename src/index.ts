@@ -63,10 +63,12 @@ export interface Options {
     readonly tiff?: ImageminOption;
   };
   readonly fileLoader?: string;
-  readonly fileLoaderOptionsGenerator?: (
-    options: Omit<FullOptions, "optionsGenerator">,
-    existingOptions: Record<string, any> | undefined
-  ) => Record<string, any>;
+  readonly fileLoaderOptionsGenerator?:
+    | string
+    | ((
+        options: Omit<FullOptions, "optionsGenerator">,
+        existingOptions: Record<string, any> | undefined
+      ) => Record<string, any>);
 }
 
 export type FullOptions = Options &
@@ -235,7 +237,13 @@ async function replaceFileLoaderOptions(
       ? parseQuery("?" + fileLoader.options)
       : fileLoader.options;
 
-  fileLoader.options = fileLoaderOptionsGenerator(options, fileLoaderOptions);
+  if (typeof fileLoaderOptionsGenerator === "string")
+    fileLoader.options = eval(fileLoaderOptionsGenerator)(
+      options,
+      fileLoaderOptions
+    );
+  else
+    fileLoader.options = fileLoaderOptionsGenerator(options, fileLoaderOptions);
 }
 
 async function processImage(

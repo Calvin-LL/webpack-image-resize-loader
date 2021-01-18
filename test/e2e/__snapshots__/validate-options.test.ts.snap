@@ -27,7 +27,11 @@ exports[`v4 validate options should throw an error on the "fileLoader" option wi
 
 exports[`v4 validate options should throw an error on the "fileLoaderOptionsGenerator" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.fileLoaderOptionsGenerator should be an instance of function."
+ - options.fileLoaderOptionsGenerator should be one of these:
+   string | function
+   Details:
+    * options.fileLoaderOptionsGenerator should be a string.
+    * options.fileLoaderOptionsGenerator should be an instance of function."
 `;
 
 exports[`v4 validate options should throw an error on the "fit" option with "0" value 1`] = `
@@ -149,7 +153,11 @@ exports[`v5 validate options should throw an error on the "fileLoader" option wi
 
 exports[`v5 validate options should throw an error on the "fileLoaderOptionsGenerator" option with 0 value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.fileLoaderOptionsGenerator should be an instance of function."
+ - options.fileLoaderOptionsGenerator should be one of these:
+   string | function
+   Details:
+    * options.fileLoaderOptionsGenerator should be a string.
+    * options.fileLoaderOptionsGenerator should be an instance of function."
 `;
 
 exports[`v5 validate options should throw an error on the "fit" option with "0" value 1`] = `

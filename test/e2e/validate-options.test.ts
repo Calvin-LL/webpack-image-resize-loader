@@ -90,7 +90,7 @@ describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
       failure: [0],
     },
     fileLoaderOptionsGenerator: {
-      success: [(_: any, o: any) => o],
+      success: [(_: any, o: any) => o, "(_, o) => o"],
       failure: [0],
     },
   };
