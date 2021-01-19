@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/Calvin-LL/webpack-image-resize-loader/compare/v3.1.0...v4.0.0) (2021-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove built-in file-loader
+
+### Features
+
+* fileLoaderOptionsGenerator can also be a string of a js function ([d856968](https://github.com/Calvin-LL/webpack-image-resize-loader/commit/d8569685073e2cbd6ecba863e6498574bc1d114c))
+* make file loader search more loose ([ae4c817](https://github.com/Calvin-LL/webpack-image-resize-loader/commit/ae4c817b7699482fba805abbf9024c51f672cb3a))
+* remove built-in file-loader ([77619ac](https://github.com/Calvin-LL/webpack-image-resize-loader/commit/77619ac9ed44e4140973d6ec1143f78ba3d780d3))
+
 ## [3.1.0](https://github.com/Calvin-LL/webpack-image-resize-loader/compare/v3.0.6...v3.1.0) (2020-12-13)
 
 
