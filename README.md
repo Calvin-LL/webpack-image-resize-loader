@@ -34,6 +34,10 @@ yarn add --dev webpack-image-resize-loader
 
 Note: if you only want to shrink some but not all images use webpack's `oneOf` (like in the [examples](#examples)). If you want to use `srcset`, check out [webpack-image-srcset-loader](https://github.com/Calvin-LL/webpack-image-srcset-loader)
 
+You must place `file-loader` or `url-loader` or some other loader capable of handing buffers before `webpack-image-resize-loader`
+
+Use [`webpack-sharp-loader`](https://github.com/Calvin-LL/webpack-sharp-loader) if you want to do other processing to your image before resizing
+
 #### webpack.config.js
 
 ```javascript
@@ -43,7 +47,7 @@ module.exports = {
     rules: [
       // ...
       {
-        // make all imported images to have max width 1000px
+        // convert all imported images to have max width 1000px
         test: /\.(png|jpe?g|webp|tiff?)$/i,
         use: [
           "file-loader",
@@ -63,13 +67,21 @@ module.exports = {
 #### You can override options with queries
 
 ```javascript
-import placeholderUrl from "./some_pic.png?quality=100";
+import image from "./some_pic.png?format=webp";
 ```
 
 or
 
 ```javascript
-import placeholderUrl from './some_pic.png?{"width":500}';
+// or any other options
+import image from "./some_pic.png?width=100&height=100&quality=100&background=green&fit=contain&position=left";
+```
+
+or
+
+```javascript
+// or any other options
+import image from './some_pic.png?{"width":500}';
 ```
 
 ## Options
