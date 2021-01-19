@@ -22,11 +22,6 @@
     "test": "tsc --project tsconfig.test-build.json && jest",
     "release": "HUSKY_SKIP_HOOKS=1 standard-version"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
   "author": {
     "name": "Calvin Liang",
     "email": "npm@calvin.sh",
@@ -69,7 +64,6 @@
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "commitizen": "^4.2.2",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.17.0",
     "eslint-plugin-import-helpers": "^1.1.0",
     "file-loader": "^6.2.0",
