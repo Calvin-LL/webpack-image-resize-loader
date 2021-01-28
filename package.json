@@ -61,7 +61,7 @@
     "@types/replace-ext": "^2.0.0",
     "@types/sharp": "^0.27.1",
     "@types/webpack": "^4.41.25",
-    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
     "commitizen": "^4.2.2",
     "eslint": "^7.17.0",
