@@ -46,7 +46,7 @@
     "mime": "^2.4.7",
     "replace-ext": "^2.0.0",
     "schema-utils": "^3.0.0",
-    "sharp": "^0.27.0"
+    "sharp": "^0.27.1"
   },
   "devDependencies": {
     "@calvin-l/webpack-loader-test-util": "^2.1.0",
