@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@calvin-l/webpack-loader-test-util": "^2.1.0",
-    "@commitlint/cli": "^11.0.0",
+    "@commitlint/cli": "^12.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@types/file-loader": "^4.2.0",
     "@types/imagemin": "^7.0.0",
