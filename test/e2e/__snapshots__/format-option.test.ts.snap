@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`v4 "format" option should work with png: result 1`] = `"34fd4f364caf681eeedc1f694a415d2f.png"`;
+exports[`v4 "format" option should work with png: result 1`] = `"dcb61cd284d6e4b9caa0f290f078bcf6.png"`;
 
-exports[`v4 "format" option should work with tiff: result 1`] = `"d3517add1d61639494032af0c20f9555.tiff"`;
+exports[`v4 "format" option should work with tiff: result 1`] = `"82a1577830424e05a5cbc3316665f340.tiff"`;
 
 exports[`v4 "format" option should work with webp: result 1`] = `"f2582a013c8feb10fefe6462033f3a41.webp"`;
 
-exports[`v5 "format" option should work with png: result 1`] = `"34fd4f364caf681eeedc1f694a415d2f.png"`;
+exports[`v5 "format" option should work with png: result 1`] = `"dcb61cd284d6e4b9caa0f290f078bcf6.png"`;
 
-exports[`v5 "format" option should work with tiff: result 1`] = `"d3517add1d61639494032af0c20f9555.tiff"`;
+exports[`v5 "format" option should work with tiff: result 1`] = `"82a1577830424e05a5cbc3316665f340.tiff"`;
 
 exports[`v5 "format" option should work with webp: result 1`] = `"f2582a013c8feb10fefe6462033f3a41.webp"`;
