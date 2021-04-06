@@ -8,5 +8,7 @@ updates:
     ignore:
       - dependency-name: "webpack"
         versions: ["5.x"]
+      - dependency-name: "husky"
+        versions: ["6.x"]
     open-pull-requests-limit: 10
     versioning-strategy: increase
