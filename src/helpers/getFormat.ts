@@ -14,6 +14,8 @@ export default function getFormat(
       return "png";
     case "image/webp":
       return "webp";
+    case "image/avif":
+      return "avif";
     case "image/tiff":
       return "tiff";
   }

@@ -1,6 +1,6 @@
 {
   "name": "webpack-image-resize-loader",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "description": "Webpack loader to resize imported images",
   "keywords": [
     "webpack",
@@ -40,6 +40,7 @@
   "dependencies": {
     "@calvin-l/webpack-loader-util": "^1.0.2",
     "imagemin": "^7.0.1",
+    "imagemin-avif": "^0.1.2",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-webp": "^6.0.0",
