@@ -58,4 +58,16 @@ describe.each([4, 5] as const)('v%d "format" option', (webpackVersion) => {
 
     expect(bundle.execute("main.js")).toMatchSnapshot("result");
   });
+
+  it("should work with avif", async () => {
+    const compiler = new WIRLWebpackTestCompiler({ webpackVersion });
+    const bundle = await compiler.compile({
+      loaderOptions: {
+        width: 20,
+        format: "avif",
+      },
+    });
+
+    expect(bundle.execute("main.js")).toMatchSnapshot("result");
+  });
 });

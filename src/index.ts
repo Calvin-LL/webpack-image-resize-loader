@@ -46,7 +46,7 @@ export interface Options {
     | "attention";
   readonly background?: sharp.Color;
   readonly scale?: number;
-  readonly format?: "jpeg" | "png" | "webp" | "tiff";
+  readonly format?: "jpeg" | "png" | "webp" | "avif" | "tiff";
   readonly quality?: number;
   readonly scaleUp?: boolean;
   readonly sharpOptions?: {
@@ -54,12 +54,14 @@ export interface Options {
     readonly png?: Partial<sharp.PngOptions>;
     readonly jpeg?: Partial<sharp.JpegOptions>;
     readonly webp?: Partial<sharp.WebpOptions>;
+    readonly avif?: Partial<sharp.AvifOptions>;
     readonly tiff?: Partial<sharp.TiffOptions>;
   };
   readonly imageminOptions?: {
     readonly png?: ImageminOption;
     readonly jpeg?: ImageminOption;
     readonly webp?: ImageminOption;
+    readonly avif?: ImageminOption;
     readonly tiff?: ImageminOption;
   };
   readonly fileLoader?: string;
@@ -98,6 +100,7 @@ export default function (
       png: { quality: 100 },
       jpeg: { quality: 100 },
       webp: { quality: 100 },
+      avif: { quality: 100 },
       tiff: { quality: 100 },
     },
     imageminOptions: {
@@ -263,10 +266,8 @@ async function processImage(
   }: FullOptions
 ): Promise<Buffer> {
   let sharpImage = sharp(Buffer.from(content));
-  const {
-    height: imageHeight,
-    width: imageWidth,
-  } = await sharpImage.metadata();
+  const { height: imageHeight, width: imageWidth } =
+    await sharpImage.metadata();
   const normalizedImageHeight = imageHeight ?? Number.MAX_VALUE;
   const normalizedImageWidth = imageWidth ?? Number.MAX_VALUE;
   const normalizedResultHeight = height ?? 0;

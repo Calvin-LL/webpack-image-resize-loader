@@ -6,6 +6,8 @@ updates:
       interval: daily
       time: "13:00"
     ignore:
+      - dependency-name: "@types/webpack"
+        versions: ["5.x"]
       - dependency-name: "webpack"
         versions: ["5.x"]
       - dependency-name: "husky"
