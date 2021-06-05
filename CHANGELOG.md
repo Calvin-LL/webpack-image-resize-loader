@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/Calvin-LL/webpack-image-resize-loader/compare/v4.0.2...v4.1.0) (2021-06-05)
+
+
+### Features
+
+* add support for AVIF ([d15f0a4](https://github.com/Calvin-LL/webpack-image-resize-loader/commit/d15f0a4998241e6c9341e568c569431ad587bae5))
+
 ### [4.0.2](https://github.com/Calvin-LL/webpack-image-resize-loader/compare/v4.0.1...v4.0.2) (2021-04-06)
 
 ### [4.0.1](https://github.com/Calvin-LL/webpack-image-resize-loader/compare/v4.0.0...v4.0.1) (2021-04-06)
