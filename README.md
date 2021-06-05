@@ -4,7 +4,7 @@
 
 This loader resize the given images to the desired size.
 
-Supports JPEG, PNG, WebP, Avif, and, TIFF images.
+Supports JPEG, PNG, WebP, AVIF, and, TIFF images.
 
 ## Examples
 
