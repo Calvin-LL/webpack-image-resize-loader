@@ -60,7 +60,7 @@
     "@types/node": "^15.12.0",
     "@types/replace-ext": "^2.0.0",
     "@types/sharp": "^0.28.3",
-    "@types/webpack": "^4.41.25",
+    "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",
     "commitizen": "^4.2.4",
