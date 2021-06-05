@@ -207,16 +207,12 @@ as in
     name: "imagemin-webp",
     options: { quality: 75 },
   },
-  avif: {
-    name: "imagemin-avif",
-    options: { quality: 65 },
-  },
 }
 ```
 
 imageminOptions can have any of the following keys: `png`, `jpeg`, `webp`, `avif`, and `tiff`.
 
-This loader uses 4 built-in [imagemin](https://github.com/imagemin/imagemin) plugins to optimize images, [imagemin-optipng](https://github.com/imagemin/imagemin-optipng), [imagemin-mozjpeg](https://github.com/imagemin/imagemin-mozjpeg), [imagemin-avif](https://github.com/delfimov/imagemin-avif), and [imagemin-webp](https://github.com/imagemin/imagemin-webp). The [`quality`](#quality) option above will override the `quality` field of every plugin.
+This loader uses 3 built-in [imagemin](https://github.com/imagemin/imagemin) plugins to optimize images, [imagemin-optipng](https://github.com/imagemin/imagemin-optipng), [imagemin-mozjpeg](https://github.com/imagemin/imagemin-mozjpeg), and [imagemin-webp](https://github.com/imagemin/imagemin-webp). The [`quality`](#quality) option above will override the `quality` field of every plugin.
 
 If you want to use some other plugins or multiple plugins, first install the plugin you want to use, then:
 

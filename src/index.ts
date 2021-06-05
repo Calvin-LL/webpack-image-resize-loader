@@ -116,10 +116,6 @@ export default function (
         name: "imagemin-webp",
         options: { quality: 75 },
       },
-      avif: {
-        name: "imagemin-avif",
-        options: { quality: 65 },
-      },
     },
     fileLoader: "file-loader",
     fileLoaderOptionsGenerator: defaultFileLoaderOptionsGenerator,
@@ -270,10 +266,8 @@ async function processImage(
   }: FullOptions
 ): Promise<Buffer> {
   let sharpImage = sharp(Buffer.from(content));
-  const {
-    height: imageHeight,
-    width: imageWidth,
-  } = await sharpImage.metadata();
+  const { height: imageHeight, width: imageWidth } =
+    await sharpImage.metadata();
   const normalizedImageHeight = imageHeight ?? Number.MAX_VALUE;
   const normalizedImageWidth = imageWidth ?? Number.MAX_VALUE;
   const normalizedResultHeight = height ?? 0;
