@@ -17,6 +17,10 @@ it("should parse webp format", () => {
   expect(getFormat("image.WEBP")).toBe("webp");
 });
 
+it("should parse avif format", () => {
+  expect(getFormat("image.avif")).toBe("avif");
+});
+
 it("should parse webp format", () => {
   expect(getFormat("image.tiff")).toBe("tiff");
   expect(getFormat("image.tif")).toBe("tiff");

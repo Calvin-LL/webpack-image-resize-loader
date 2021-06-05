@@ -4,7 +4,7 @@
 
 This loader resize the given images to the desired size.
 
-Supports JPEG, PNG, WebP, and, TIFF images.
+Supports JPEG, PNG, WebP, Avif, and, TIFF images.
 
 ## Examples
 
@@ -95,7 +95,7 @@ import image from './some_pic.png?{"width":500}';
 | **[`fit`](#fit)**                                               | `"cover"`, `"contain"`, `"fill"`, `"inside"`, or `"outside"` | `"cover"`                                     | How the image should be resized to fit both provided dimensions.                             |
 | **[`position`](#position)**                                     | See **[`position`](#position)**                              | `"centre"`                                    | Where the image is positioned.                                                               |
 | **[`background`](#background)**                                 | `string\|object`                                             | `{r:0,g:0,b:0,alpha:1}`                       | The background color of the image.                                                           |
-| **[`format`](#format)**                                         | `"jpeg"`, `"png"`, `"webp"`, or `"tiff"`                     | `undefined`                                   | The format of the output file.                                                               |
+| **[`format`](#format)**                                         | `"jpeg"`, `"png"`, `"webp"`, `"avif"`, or `"tiff"`           | `undefined`                                   | The format of the output file.                                                               |
 | **[`quality`](#quality)**                                       | `number`                                                     | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                             |
 | **[`sharpOptions`](#sharpoptions)**                             | `object`                                                     | [see below](#sharpoptions)                    | Additional options for [sharp](https://sharp.pixelplumbing.com).                             |
 | **[`imageminOptions`](#imageminoptions)**                       | `string\|object\|array`                                      | [see below](#imageminoptions)                 | Additional options for [imagemin](https://github.com/imagemin/imagemin).                     |
@@ -169,11 +169,12 @@ quality is kept at 100 so [imagemin](https://github.com/imagemin/imagemin) will 
   png: { quality: 100 },
   jpeg: { quality: 100 },
   webp: { quality: 100 },
+  avif: { quality: 100 },
   tiff: { quality: 100 },
 }
 ```
 
-sharpOptions can have any of the following keys: `resize`, `png`, `jpeg`, `webp`, and `tiff`. These options will override options specified above.
+sharpOptions can have any of the following keys: `resize`, `png`, `jpeg`, `webp`, `avif`, and `tiff`. These options will override options specified above.
 
 as in
 
@@ -183,6 +184,7 @@ as in
   png: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#png
   jpeg: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#jpeg
   webp: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#webp
+  avif: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#avif
   tiff: {}, // these are passed as the options object in https://sharp.pixelplumbing.com/api-output#tiff
 }
 ```
@@ -205,12 +207,16 @@ as in
     name: "imagemin-webp",
     options: { quality: 75 },
   },
+  avif: {
+    name: "imagemin-avif",
+    options: { quality: 65 },
+  },
 }
 ```
 
-imageminOptions can have any of the following keys: `png`, `jpeg`, `webp`, and `tiff`.
+imageminOptions can have any of the following keys: `png`, `jpeg`, `webp`, `avif`, and `tiff`.
 
-This loader uses 3 built-in [imagemin](https://github.com/imagemin/imagemin) plugins to optimize images, [imagemin-optipng](https://github.com/imagemin/imagemin-optipng), [imagemin-mozjpeg](https://github.com/imagemin/imagemin-mozjpeg), and [imagemin-webp](https://github.com/imagemin/imagemin-webp). The [`quality`](#quality) option above will override the `quality` field of every plugin.
+This loader uses 4 built-in [imagemin](https://github.com/imagemin/imagemin) plugins to optimize images, [imagemin-optipng](https://github.com/imagemin/imagemin-optipng), [imagemin-mozjpeg](https://github.com/imagemin/imagemin-mozjpeg), [imagemin-avif](https://github.com/delfimov/imagemin-avif), and [imagemin-webp](https://github.com/imagemin/imagemin-webp). The [`quality`](#quality) option above will override the `quality` field of every plugin.
 
 If you want to use some other plugins or multiple plugins, first install the plugin you want to use, then:
 

@@ -50,7 +50,7 @@
       "anyOf": [{ "type": "string" }, { "type": "object" }]
     },
     "format": {
-      "enum": ["jpeg", "png", "webp", "tiff"]
+      "enum": ["jpeg", "png", "webp", "avif", "tiff"]
     },
     "quality": {
       "type": "number",
@@ -146,6 +146,44 @@
           ]
         },
         "webp": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "options": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "avif": {
           "anyOf": [
             { "type": "null" },
             { "type": "string" },
