@@ -64,7 +64,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "commitizen": "^4.2.4",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-plugin-import-helpers": "^1.1.0",
     "file-loader": "^6.2.0",
     "husky": "^4.3.6",
