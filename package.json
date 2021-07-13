@@ -59,7 +59,7 @@
     "@types/mime": "^2.0.3",
     "@types/node": "^16.3.1",
     "@types/replace-ext": "^2.0.0",
-    "@types/sharp": "^0.28.3",
+    "@types/sharp": "^0.28.4",
     "@types/webpack": "^4.41.30",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
