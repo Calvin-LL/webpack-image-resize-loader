@@ -45,7 +45,7 @@
     "imagemin-webp": "^6.0.0",
     "mime": "^2.5.2",
     "replace-ext": "^2.0.0",
-    "schema-utils": "^3.0.0",
+    "schema-utils": "^3.1.0",
     "sharp": "^0.28.3"
   },
   "devDependencies": {
@@ -57,12 +57,12 @@
     "@types/jest": "^26.0.22",
     "@types/jest-image-snapshot": "^4.3.0",
     "@types/mime": "^2.0.3",
-    "@types/node": "^15.12.4",
+    "@types/node": "^16.3.1",
     "@types/replace-ext": "^2.0.0",
     "@types/sharp": "^0.28.3",
     "@types/webpack": "^4.41.25",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
-    "@typescript-eslint/parser": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.3",
     "commitizen": "^4.2.4",
     "eslint": "^7.29.0",
     "eslint-plugin-import-helpers": "^1.1.0",
