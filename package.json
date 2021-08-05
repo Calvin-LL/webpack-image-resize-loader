@@ -55,7 +55,7 @@
     "@types/file-loader": "^5.0.0",
     "@types/imagemin": "^7.0.0",
     "@types/jest": "^26.0.22",
-    "@types/jest-image-snapshot": "^4.3.0",
+    "@types/jest-image-snapshot": "^4.3.1",
     "@types/mime": "^2.0.3",
     "@types/node": "^16.3.1",
     "@types/replace-ext": "^2.0.0",
