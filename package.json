@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@calvin-l/webpack-loader-util": "^1.0.2",
-    "imagemin": "^7.0.1",
+    "imagemin": "^8.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-webp": "^6.0.0",
