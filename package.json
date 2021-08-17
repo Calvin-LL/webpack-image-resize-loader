@@ -68,7 +68,7 @@
     "eslint-plugin-import-helpers": "^1.1.0",
     "file-loader": "^6.2.0",
     "husky": "^4.3.6",
-    "jest": "^26.6.3",
+    "jest": "^27.0.6",
     "jest-image-snapshot": "^4.5.1",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
