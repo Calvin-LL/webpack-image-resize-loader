@@ -61,7 +61,11 @@ export type FullOptions = Options &
   Required<
     Pick<
       Options,
-      "scaleUp" | "format" | "fileLoader" | "fileLoaderOptionsGenerator"
+      | "scaleUp"
+      | "format"
+      | "sharpOptions"
+      | "fileLoader"
+      | "fileLoaderOptionsGenerator"
     >
   >;
 
@@ -75,6 +79,12 @@ export default function (
   const defaultOptions: FullOptions = {
     format: getFormat(this.resourcePath),
     scaleUp: false,
+    sharpOptions: {
+      png: { compressionLevel: 9, adaptiveFiltering: true },
+      jpeg: { mozjpeg: true },
+      webp: { reductionEffort: 6 },
+      avif: { speed: 0 },
+    },
     fileLoader: "file-loader",
     fileLoaderOptionsGenerator: defaultFileLoaderOptionsGenerator,
   };
@@ -82,6 +92,7 @@ export default function (
   const options: FullOptions = {
     ...defaultOptions,
     sharpOptions: {
+      ...defaultOptions.sharpOptions,
       ...rawOptions.sharpOptions,
     },
     ...rawOptions,
