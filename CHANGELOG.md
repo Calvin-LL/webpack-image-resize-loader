@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/Calvin-LL/webpack-image-resize-loader/compare/v4.1.0...v5.0.0) (2021-10-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove imagemin dependencies and remove imageminOptions from options
+
+### Features
+
+* remove imagemin ([#402](https://github.com/Calvin-LL/webpack-image-resize-loader/issues/402)) ([b3d6f92](https://github.com/Calvin-LL/webpack-image-resize-loader/commit/b3d6f92bb84a7a449bfb3ebd5c07b6f244e45a62))
+
 ## [4.1.0](https://github.com/Calvin-LL/webpack-image-resize-loader/compare/v4.0.2...v4.1.0) (2021-06-05)
 
 
