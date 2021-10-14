@@ -155,7 +155,7 @@ When unspecified, outputs the same format as the imported file.
 
 ##### default
 
-Defaults to whatever [shape's default is for that given format](https://sharp.pixelplumbing.com/api-output)
+Defaults to [shape's default is for that given format](https://sharp.pixelplumbing.com/api-output)
 
 | output format | default quality |
 | ------------- | --------------- |
