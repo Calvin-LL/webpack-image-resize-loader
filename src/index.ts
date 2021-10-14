@@ -261,7 +261,7 @@ async function processImage(
   }
 
   sharpImage = sharpImage[format]({
-    quality,
+    ...(quality ? { quality } : {}),
     ...sharpOptions?.[format],
   });
 
