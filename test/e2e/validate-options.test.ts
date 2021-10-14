@@ -67,24 +67,6 @@ describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
       success: [{ resize: { fastShrinkOnLoad: true } }],
       failure: [0],
     },
-    imageminOptions: {
-      success: [
-        { png: null },
-        { png: ["imagemin-optipng"] },
-        { png: [{ name: "imagemin-optipng" }] },
-        {
-          png: [
-            {
-              name: "imagemin-optipng",
-              options: {
-                optimizationLevel: 1,
-              },
-            },
-          ],
-        },
-      ],
-      failure: [0],
-    },
     fileLoader: {
       success: ["file-loader"],
       failure: [0],

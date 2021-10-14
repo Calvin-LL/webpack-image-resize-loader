@@ -67,12 +67,6 @@ exports[`v4 validate options should throw an error on the "height" option with t
  - options.height should be a number (should be >= 1)."
 `;
 
-exports[`v4 validate options should throw an error on the "imageminOptions" option with 0 value 1`] = `
-"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.imageminOptions should be an object:
-   object { png?, jpeg?, webp?, avif?, tiff?, … }"
-`;
-
 exports[`v4 validate options should throw an error on the "position" option with "0" value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.position should be one of these:
@@ -191,12 +185,6 @@ exports[`v5 validate options should throw an error on the "height" option with 0
 exports[`v5 validate options should throw an error on the "height" option with true value 1`] = `
 "Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
  - options.height should be a number (should be >= 1)."
-`;
-
-exports[`v5 validate options should throw an error on the "imageminOptions" option with 0 value 1`] = `
-"Invalid options object. Image Resize Loader has been initialized using an options object that does not match the API schema.
- - options.imageminOptions should be an object:
-   object { png?, jpeg?, webp?, avif?, tiff?, … }"
 `;
 
 exports[`v5 validate options should throw an error on the "position" option with "0" value 1`] = `
