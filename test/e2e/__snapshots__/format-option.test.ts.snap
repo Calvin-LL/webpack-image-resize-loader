@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`v4 "format" option should work with avif: result 1`] = `"49ee3191a9c1319df48801d41ff4c074.avif"`;
+exports[`v4 "format" option should work with avif: result 1`] = `"2bfab2d8eeb8be1c23ee2f16ef33ae8c.avif"`;
 
-exports[`v4 "format" option should work with png: result 1`] = `"cc35d33598966345a29eb7312d061823.png"`;
+exports[`v4 "format" option should work with png: result 1`] = `"7437a9dca4d3f15daa7c4b5e7f1955de.png"`;
 
-exports[`v4 "format" option should work with tiff: result 1`] = `"82a1577830424e05a5cbc3316665f340.tiff"`;
+exports[`v4 "format" option should work with tiff: result 1`] = `"9b08cb97af82d83fed2afcc16f9fc5f8.tiff"`;
 
-exports[`v4 "format" option should work with webp: result 1`] = `"f2582a013c8feb10fefe6462033f3a41.webp"`;
+exports[`v4 "format" option should work with webp: result 1`] = `"94de4bad758ed8fb57b30af66d2f9fed.webp"`;
 
-exports[`v5 "format" option should work with avif: result 1`] = `"49ee3191a9c1319df48801d41ff4c074.avif"`;
+exports[`v5 "format" option should work with avif: result 1`] = `"2bfab2d8eeb8be1c23ee2f16ef33ae8c.avif"`;
 
-exports[`v5 "format" option should work with png: result 1`] = `"cc35d33598966345a29eb7312d061823.png"`;
+exports[`v5 "format" option should work with png: result 1`] = `"7437a9dca4d3f15daa7c4b5e7f1955de.png"`;
 
-exports[`v5 "format" option should work with tiff: result 1`] = `"82a1577830424e05a5cbc3316665f340.tiff"`;
+exports[`v5 "format" option should work with tiff: result 1`] = `"9b08cb97af82d83fed2afcc16f9fc5f8.tiff"`;
 
-exports[`v5 "format" option should work with webp: result 1`] = `"f2582a013c8feb10fefe6462033f3a41.webp"`;
+exports[`v5 "format" option should work with webp: result 1`] = `"94de4bad758ed8fb57b30af66d2f9fed.webp"`;
