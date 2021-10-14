@@ -98,7 +98,6 @@ import image from './some_pic.png?{"width":500}';
 | **[`format`](#format)**                                         | `"jpeg"`, `"png"`, `"webp"`, `"avif"`, or `"tiff"`           | `undefined`                                   | The format of the output file.                                                               |
 | **[`quality`](#quality)**                                       | `number`                                                     | `80` for JPEG, WebP, and TIFF. `100` for PNG. | The quality of the output image.                                                             |
 | **[`sharpOptions`](#sharpoptions)**                             | `object`                                                     | [see below](#sharpoptions)                    | Additional options for [sharp](https://sharp.pixelplumbing.com).                             |
-| **[`imageminOptions`](#imageminoptions)**                       | `string\|object\|array`                                      | [see below](#imageminoptions)                 | Additional options for [imagemin](https://github.com/imagemin/imagemin).                     |
 | **[`fileLoader`](#fileloader)**                                 | `string`                                                     | `"file-loader"`                               | Name or path of a loader that takes in buffers. ([why?](#fileloader))                        |
 | **[`fileLoaderOptionsGenerator`](#fileloaderoptionsgenerator)** | `function`                                                   | [see below](#fileloaderoptionsgenerator)      | A function that generates options for the specified `fileLoader`.                            |
 
@@ -106,13 +105,13 @@ import image from './some_pic.png?{"width":500}';
 
 Pixels width the resultant image should be. Use `null` or `undefined` to auto-scale the width to match the height.
 
-This is passed as `width` to the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `width` to the [`options` of the parameters of sharp's `resize` function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `height`
 
 Pixels height the resultant image should be. Use null or undefined to auto-scale the height to match the width.
 
-This is passed as `height` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `height` in the [`options` of the parameters of sharp's `resize` function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `scale`
 
@@ -126,7 +125,7 @@ When true, images will be scaled up to a larger size. When false, if the desired
 
 ### `fit`
 
-This is passed as `fit` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `fit` in the [`options` of the parameters of sharp's `resize` function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `position`
 
@@ -138,7 +137,7 @@ position, gravity or strategy to use when `fit` is `cover` or `contain`.
 - `sharp.gravity`: `north`, `northeast`, `east`, `southeast`, `south`, `southwest`, `west`, `northwest`, `center` or `centre`.
 - `sharp.strategy`: `cover` only, dynamically crop using either the `entropy` or `attention` strategy.
 
-This is passed as `position` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `position` in the [`options` of the parameters of sharp's `resize` function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `background`
 
@@ -146,7 +145,7 @@ example: `"#7743CE"`, `"rgb(255, 255, 255)"`, `{r:0,g:0,b:0,alpha:1}`
 
 background colour when using a `fit` of `contain`, parsed by the [color](https://www.npmjs.com/package/color) module, defaults to black without transparency.
 
-This is passed as `background` in the [`options` of the parameters of sharp's resize function](https://sharp.pixelplumbing.com/api-resize#parameters)
+This is passed as `background` in the [`options` of the parameters of sharp's `resize` function](https://sharp.pixelplumbing.com/api-resize#parameters)
 
 ### `format`
 
@@ -154,27 +153,38 @@ When unspecified, outputs the same format as the imported file.
 
 ### `quality`
 
+##### default
+
+Defaults to whatever [shape's default is for that given format](https://sharp.pixelplumbing.com/api-output)
+
+| output format | default quality |
+| ------------- | --------------- |
+| png           | 100             |
+| jpeg          | 80              |
+| webp          | 80              |
+| avif          | 50              |
+| tiff          | 80              |
+
 From 1-100, 1 being most compression and worst quality, 100 being least compression and best quality.
 
-This is passed as `quality` in the the options objects of [imagemin plugins](#imageminoptions)
+This is passed as `quality` in the [`options` of the parameters of sharp's `png`, `jpeg`, `webp`, `avif`, and `tiff` output functions](https://sharp.pixelplumbing.com/api-output)
 
 ### `sharpOptions`
 
 ##### default
 
-quality is kept at 100 so [imagemin](https://github.com/imagemin/imagemin) will do the compression
+The default options aim to provide the smallest images even if it takes more time to generate the image.
 
 ```javascript
 {
-  png: { quality: 100 },
-  jpeg: { quality: 100 },
-  webp: { quality: 100 },
-  avif: { quality: 100 },
-  tiff: { quality: 100 },
+  png: { compressionLevel: 9, adaptiveFiltering: true },
+  jpeg: { mozjpeg: true },
+  webp: { reductionEffort: 6 },
+  avif: { speed: 0 }
 }
 ```
 
-sharpOptions can have any of the following keys: `resize`, `png`, `jpeg`, `webp`, `avif`, and `tiff`. These options will override options specified above.
+`sharpOptions` can have any of the following keys: `resize`, `png`, `jpeg`, `webp`, `avif`, and `tiff`. These options will override options specified above.
 
 as in
 
@@ -189,60 +199,27 @@ as in
 }
 ```
 
-### `imageminOptions`
+Setting an item in this object overrides all the defaults for that item.
 
-##### default
+For example:
 
+<!-- prettier-ignore -->
 ```javascript
-{
-  png: {
-    name: "imagemin-optipng",
-    options: { interlaced: true, optimizationLevel: 7 },
-  },
-  jpeg: {
-    name: "imagemin-mozjpeg",
-    options: { quality: 80 },
-  },
-  webp: {
-    name: "imagemin-webp",
-    options: { quality: 75 },
-  },
+// ...
+sharpOptions: {
+  png: { quality: 80 }
 }
+// ...
 ```
 
-imageminOptions can have any of the following keys: `png`, `jpeg`, `webp`, `avif`, and `tiff`.
-
-This loader uses 3 built-in [imagemin](https://github.com/imagemin/imagemin) plugins to optimize images, [imagemin-optipng](https://github.com/imagemin/imagemin-optipng), [imagemin-mozjpeg](https://github.com/imagemin/imagemin-mozjpeg), and [imagemin-webp](https://github.com/imagemin/imagemin-webp). The [`quality`](#quality) option above will override the `quality` field of every plugin.
-
-If you want to use some other plugins or multiple plugins, first install the plugin you want to use, then:
+`sharpOptions` will become this after being merged with defaults:
 
 ```javascript
 {
-  imageminOptions: {
-    png: "imagemin-pngquant";
-  }
-}
-// or
-{
-  imageminOptions: {
-    png: ["imagemin-optipng", "imagemin-pngquant"];
-  }
-}
-// or
-{
-  imageminOptions: {
-    png: ["imagemin-optipng", { name: "imagemin-pngquant", options: {} }];
-  }
-}
-```
-
-To disable imagemin for a particular format:
-
-```javascript
-{
-  imageminOptions: {
-    png: null;
-  }
+  png: { quality: 80 }
+  jpeg: { mozjpeg: true },
+  webp: { reductionEffort: 6 },
+  avif: { speed: 0 }
 }
 ```
 
