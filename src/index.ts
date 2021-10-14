@@ -1,5 +1,4 @@
 import fileLoader from "file-loader";
-import imagemin from "imagemin";
 import { parseQuery } from "loader-utils";
 import { validate } from "schema-utils";
 import { Schema } from "schema-utils/declarations/validate";
@@ -9,15 +8,7 @@ import { loader } from "webpack";
 import { getOptions } from "@calvin-l/webpack-loader-util";
 
 import getFormat from "./helpers/getFormat";
-import getImageminPlugins from "./helpers/getImageminPlugins";
-import normalizeImageminOption from "./helpers/normalizeImageminOption";
 import schema from "./options.json";
-
-export type ImageminOption =
-  | null
-  | string
-  | { name: string; options?: Record<string, any> }
-  | (string | { name: string; options?: Record<string, any> })[];
 
 export interface Options {
   readonly width?: number;
@@ -57,13 +48,6 @@ export interface Options {
     readonly avif?: Partial<sharp.AvifOptions>;
     readonly tiff?: Partial<sharp.TiffOptions>;
   };
-  readonly imageminOptions?: {
-    readonly png?: ImageminOption;
-    readonly jpeg?: ImageminOption;
-    readonly webp?: ImageminOption;
-    readonly avif?: ImageminOption;
-    readonly tiff?: ImageminOption;
-  };
   readonly fileLoader?: string;
   readonly fileLoaderOptionsGenerator?:
     | string
@@ -80,7 +64,6 @@ export type FullOptions = Options &
       | "scaleUp"
       | "format"
       | "sharpOptions"
-      | "imageminOptions"
       | "fileLoader"
       | "fileLoaderOptionsGenerator"
     >
@@ -97,25 +80,10 @@ export default function (
     format: getFormat(this.resourcePath),
     scaleUp: false,
     sharpOptions: {
-      png: { quality: 100 },
-      jpeg: { quality: 100 },
-      webp: { quality: 100 },
-      avif: { quality: 100 },
-      tiff: { quality: 100 },
-    },
-    imageminOptions: {
-      png: {
-        name: "imagemin-optipng",
-        options: { interlaced: true, optimizationLevel: 7 },
-      },
-      jpeg: {
-        name: "imagemin-mozjpeg",
-        options: { quality: 80 },
-      },
-      webp: {
-        name: "imagemin-webp",
-        options: { quality: 75 },
-      },
+      png: { compressionLevel: 9, adaptiveFiltering: true },
+      jpeg: { mozjpeg: true },
+      webp: { reductionEffort: 6 },
+      avif: { speed: 0 },
     },
     fileLoader: "file-loader",
     fileLoaderOptionsGenerator: defaultFileLoaderOptionsGenerator,
@@ -126,10 +94,6 @@ export default function (
     sharpOptions: {
       ...defaultOptions.sharpOptions,
       ...rawOptions.sharpOptions,
-    },
-    imageminOptions: {
-      ...defaultOptions.imageminOptions,
-      ...rawOptions.imageminOptions,
     },
     ...rawOptions,
   };
@@ -262,7 +226,6 @@ async function processImage(
     quality,
     scaleUp,
     sharpOptions,
-    imageminOptions,
   }: FullOptions
 ): Promise<Buffer> {
   let sharpImage = sharp(Buffer.from(content));
@@ -298,22 +261,11 @@ async function processImage(
   }
 
   sharpImage = sharpImage[format]({
+    ...(quality ? { quality } : {}),
     ...sharpOptions?.[format],
   });
 
-  const normalizedImageminOptions = normalizeImageminOption(
-    imageminOptions?.[format]
-  );
-  const imageminPlugins = getImageminPlugins(normalizedImageminOptions, {
-    ...(quality ? { quality } : {}),
-  });
   const sharpImageOutput = await sharpImage.toBuffer();
 
-  if (imageminPlugins === undefined) return sharpImageOutput;
-
-  const imageminOutput = await imagemin.buffer(sharpImageOutput, {
-    plugins: imageminPlugins,
-  });
-
-  return imageminOutput;
+  return sharpImageOutput;
 }
