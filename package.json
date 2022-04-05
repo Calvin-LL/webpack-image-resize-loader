@@ -32,7 +32,7 @@
   "homepage": "https://github.com/Calvin-LL/webpack-image-resize-loader",
   "license": "MIT",
   "engines": {
-    "node": ">= 10.13.0"
+    "node": ">= 12.13.0"
   },
   "peerDependencies": {
     "webpack": "^4.0.0 || ^5.0.0"
@@ -42,7 +42,7 @@
     "mime": "^2.5.2",
     "replace-ext": "^2.0.0",
     "schema-utils": "^3.1.1",
-    "sharp": "^0.28.3"
+    "sharp": "^0.30.3"
   },
   "devDependencies": {
     "@calvin-l/webpack-loader-test-util": "^3.0.0",
