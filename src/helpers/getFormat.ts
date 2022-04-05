@@ -18,6 +18,8 @@ export default function getFormat(
       return "avif";
     case "image/tiff":
       return "tiff";
+    case "image/gif":
+      return "gif";
   }
 
   throw new Error(`unsupported image format ${resourcePath}`);
