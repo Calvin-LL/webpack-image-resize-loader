@@ -50,7 +50,7 @@
       "anyOf": [{ "type": "string" }, { "type": "object" }]
     },
     "format": {
-      "enum": ["jpeg", "png", "webp", "avif", "tiff"]
+      "enum": ["jpeg", "png", "webp", "avif", "tiff", "gif"]
     },
     "quality": {
       "type": "number",

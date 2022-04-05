@@ -37,7 +37,7 @@ export interface Options {
     | "attention";
   readonly background?: sharp.Color;
   readonly scale?: number;
-  readonly format?: "jpeg" | "png" | "webp" | "avif" | "tiff";
+  readonly format?: "jpeg" | "png" | "webp" | "avif" | "tiff" | "gif";
   readonly quality?: number;
   readonly scaleUp?: boolean;
   readonly sharpOptions?: {
@@ -47,6 +47,7 @@ export interface Options {
     readonly webp?: Partial<sharp.WebpOptions>;
     readonly avif?: Partial<sharp.AvifOptions>;
     readonly tiff?: Partial<sharp.TiffOptions>;
+    readonly gif?: Partial<sharp.GifOptions>;
   };
   readonly fileLoader?: string;
   readonly fileLoaderOptionsGenerator?:

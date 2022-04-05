@@ -52,7 +52,7 @@ describe.each([4, 5] as const)("v%d validate options", (webpackVersion) => {
       failure: [-1, 0],
     },
     format: {
-      success: ["jpeg", "png", "webp", "tiff"],
+      success: ["jpeg", "png", "webp", "tiff", "gif"],
       failure: [true],
     },
     quality: {
